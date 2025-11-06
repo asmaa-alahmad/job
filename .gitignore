@@ -1,0 +1,67 @@
+# --- Laravel core ---
+/vendor/
+/node_modules/
+/public/hot
+/public/storage
+/public/build
+/public/mix-manifest.json
+/storage/*.key
+/.env
+/.env.*
+/.env
+
+# Framework caches & logs
+/bootstrap/cache/*.php
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+
+# Keep placeholder .gitignore files if present
+!storage/app/public/.gitignore
+!storage/framework/.gitignore
+!storage/logs/.gitignore
+!bootstrap/cache/.gitignore
+
+# PHPUnit & coverage
+.phpunit.result.cache
+/.phpunit.cache
+/coverage
+
+# CS Fixer / tooling caches
+.php-cs-fixer.cache
+.php-cs.cache
+/.php-cs-fixer.cache
+
+# IDE / OS
+/.idea/
+/.vscode/
+/.fleet/
+.DS_Store
+Thumbs.db
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- Common in CodeCanyon scripts (adjust if paths differ) ---
+# Uploads & temp
+/public/uploads/
+/public/user-uploads/
+/public/images/tmp/
+/public/temp/
+/public/cache/
+
+# One-time installers / backups
+/installer/
+/storage/installer/
+/backup*/
+/_backups*/
+
+# License & archives
+license.txt
+LICENSE.txt
+/codecanyon-*.zip
+/purchase_code*
