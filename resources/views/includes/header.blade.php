@@ -17,6 +17,13 @@
 
                         <ul class="navbar-nav">
               <li class="nav-item {{ Request::url() == route('index') ? 'active' : '' }}"><a href="{{url('/')}}" class="nav-link">{{__('Home')}}</a> </li>
+              @foreach($show_in_top_menu as $top_menu)
+                    @php
+                    $cmsContent = App\CmsContent::getContentBySlug($top_menu->page_slug);
+                    @endphp
+
+                    <li class="nav-item {{ Request::url() == route('cms', $top_menu->page_slug) ? 'active' : '' }}"><a class="nav-link" href="{{ route('cms', $top_menu->page_slug) }}">{{ $cmsContent->page_title }}</a></li>
+                    @endforeach
 							
                             
 							@if(Auth::guard('company')->check())
