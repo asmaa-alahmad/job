@@ -7,7 +7,7 @@
 @include('includes.search')
 <!-- Search End --> 
 
-<div class="infodatawrap">
+{{-- <div class="infodatawrap">
 <div class="container">
 <div class="row">
     <div class="col-md-6">@include('includes.login_text')</div>
@@ -15,15 +15,15 @@
 </div>
 
 </div>
-</div>
+</div> --}}
 
 <!-- Top Employers start -->
-@include('includes.top_employers')
+{{-- @include('includes.top_employers') --}}
 <!-- Top Employers ends --> 
 
 
 <!-- industries start -->
-@include('includes.industries')
+{{-- @include('includes.industries') --}}
 <!-- industries ends --> 
 
 <!-- Featured Jobs start -->

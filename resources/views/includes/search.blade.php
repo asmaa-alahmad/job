@@ -1,12 +1,12 @@
 
 
 
-<div class="searchwrap">
+<div class="section searchwrap">
 
 <div class="container">
     
-    <div class="row">
-        <div class="col-lg-6">
+    <div class="row text-center">
+        <div class="col-lg-12">
     
             <div class="srjobseeker">
                 <div class="bxsrctxt">
@@ -32,7 +32,7 @@
             </div>
    
         </div>
-        <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             @if((bool)$siteSetting->is_slider_active)
             <!-- Revolution slider start -->
             <div class="tp-banner-container">
@@ -64,7 +64,7 @@
             @endif
 
 
-        </div>
+        </div> --}}
     </div>   
 
 </div>

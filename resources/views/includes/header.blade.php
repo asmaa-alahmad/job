@@ -22,7 +22,7 @@
                     $cmsContent = App\CmsContent::getContentBySlug($top_menu->page_slug);
                     @endphp
 
-                    <li class="nav-item {{ Request::url() == route('cms', $top_menu->page_slug) ? 'active' : '' }}"><a class="nav-link" href="{{ route('cms', $top_menu->page_slug) }}">{{ $cmsContent->page_title }}</a></li>
+                    <li class="nav-item {{ Request::url() == route('cms', $top_menu->page_slug) ? 'active' : '' }}"><a class="nav-link" href="{{ route('cms', $top_menu->page_slug) }}">{{ __($cmsContent->page_title) }}</a></li>
                     @endforeach
 							
                             
