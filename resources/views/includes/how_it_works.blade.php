@@ -1,5 +1,5 @@
 
-<div class="howitsection">
+<div class="section howitsection">
 <div class="container">   
 <div class="howitwrap">
 

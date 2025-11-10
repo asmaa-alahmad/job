@@ -10,7 +10,7 @@
                 <label class="radio-inline">{!! Form::radio('is_slider_active', 0, true, ['id' => 'is_slider_active_no']) !!} No </label>
             </div>
             {!! APFrmErrHelp::showErrors($errors, 'is_slider_active') !!}
-        </div>        
+        </div>
     </fieldset>
 
 </div>

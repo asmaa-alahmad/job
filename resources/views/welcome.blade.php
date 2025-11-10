@@ -29,14 +29,17 @@
 <!-- Featured Jobs start -->
 @include('includes.featured_jobs')
 <!-- Featured Jobs ends -->
+<!-- How it Works start -->
+@include('includes.how_it_works')
+<!-- How it Works Ends -->
 
-<!-- Popular Searches start -->
-@include('includes.popular_searches')
-<!-- Popular Searches ends --> 
 
 <!-- Latest Jobs start -->
 @include('includes.latest_jobs')
 <!-- Latest Jobs ends -->
+<!-- Popular Searches start -->
+@include('includes.popular_searches')
+<!-- Popular Searches ends --> 
 
 <!-- Top Cities start -->
 @include('includes.top_cities')
@@ -46,9 +49,7 @@
 @include('includes.latest_resume')
 <!-- Premium Ends -->
 
-<!-- How it Works start -->
-@include('includes.how_it_works')
-<!-- How it Works Ends -->
+
 
 
 <!-- Testimonials start -->

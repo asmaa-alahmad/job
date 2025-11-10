@@ -7,7 +7,7 @@
 </li>
 
 
-<li class="nav-item  "> <a href="javascript:;" class="nav-link nav-toggle"> <i class="icon-wrench"></i> <span class="title">Static Content Widgets</span> <span class="arrow"></span> </a>
+<li class="nav-item  "> <a href="javascript:;" class="nav-link nav-toggle"> <i class="icon-wrench"></i> <span class="title">how it work widget</span> <span class="arrow"></span> </a>
     <ul class="sub-menu">
 
 <?php 

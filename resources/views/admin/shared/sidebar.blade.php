@@ -32,6 +32,10 @@
             <h3 class="uppercase">Modules</h3>
         </li>
         @include('admin/shared/side_bars/cms')
+        <li class="heading">
+                <h3 class="uppercase">Manage</h3>
+            </li>
+            @include('admin/shared/side_bars/site_setting')
         @include('admin/shared/side_bars/job')
         @include('admin/shared/side_bars/company')
         @include('admin/shared/side_bars/site_user')
