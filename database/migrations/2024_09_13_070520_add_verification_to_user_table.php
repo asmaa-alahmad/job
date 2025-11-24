@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of Jrean\UserVerification package.
  *
@@ -29,9 +30,14 @@ class AddVerificationToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table($this->getUserTableName(), function (Blueprint $table) {
-            $table->boolean('verified')->default(false);
-            $table->string('verification_token')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            if (!Schema::hasColumn('users', 'verified')) {
+                $table->boolean('verified')->default(false);
+            }
+
+            if (!Schema::hasColumn('users', 'verification_token')) {
+                $table->string('verification_token')->nullable();
+            }
         });
     }
 
@@ -42,9 +48,14 @@ class AddVerificationToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table($this->getUserTableName(), function (Blueprint $table) {
-            $table->dropColumn('verified');
-            $table->dropColumn('verification_token');
+        Schema::table('users', function (Blueprint $table) {
+            if (Schema::hasColumn('users', 'verified')) {
+                $table->dropColumn('verified');
+            }
+
+            if (Schema::hasColumn('users', 'verification_token')) {
+                $table->dropColumn('verification_token');
+            }
         });
     }
 }

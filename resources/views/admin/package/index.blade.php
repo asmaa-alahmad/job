@@ -128,19 +128,39 @@
     });
     function deletePackage(id) {
         var msg = 'Are you sure?';
-        if (confirm(msg)) {
-            $.post("{{ route('delete.package') }}", {id: id, _method: 'DELETE', _token: '{{ csrf_token() }}'})
-                    .done(function (response) {
-                        if (response == 'ok')
+        if (confirm(msg)) 
+        {
+                $.post("{{ route('delete.package') }}", {id: id, _method: 'DELETE', _token: '{{ csrf_token() }}'})
+                        .done(function (response) 
                         {
-                            var table = $('#packageDatatableAjax').DataTable();
-                            table.row('packageDtRow' + id).remove().draw(false);
-                        } else
-                        {
-                            alert('Request Failed!');
-                        }
-                    });
+                            if (response == 'ok')
+                            {
+                                var table = $('#packageDatatableAjax').DataTable();
+                                table.row('packageDtRow' + id).remove().draw(false);
+                            } else
+                            {
+                                alert('Request Failed!');
+                            }
+                        });
         }
     }
+    
+   function hidePackage(id) {
+    if (!confirm("Do you want to hide this package? ")) return;
+
+    $.post("/admin/hide-package/" + id, {
+        _method: 'PUT',
+        _token: "{{ csrf_token() }}"
+    })
+    .done(function(res){
+        console.log("SUCCESS:", res);
+        alert("The operation was successful.");
+    })
+    .fail(function(err){
+        console.log("ERROR:", err.responseText);
+    });
+}
+
+
 </script> 
 @endpush

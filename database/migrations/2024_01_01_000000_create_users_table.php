@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('city_id', 50)->nullable();
             $table->string('phone', 20)->nullable();
             $table->string('mobile_num', 25)->nullable();
-            $table->string('job_title', 100)->nullable();
+            $table->foreignId('job_title_id')->nullable()->constrained('job_titles')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('job_experience_id')->nullable();
             $table->integer('career_level_id')->nullable();
             $table->integer('industry_id')->nullable();

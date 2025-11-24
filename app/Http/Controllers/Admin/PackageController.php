@@ -47,6 +47,7 @@ class PackageController extends Controller
         $package->package_num_days = $request->input('package_num_days');
         $package->package_num_listings = $request->input('package_num_listings');
         $package->package_for = $request->input('package_for');
+        $package->description = $request->input('description');
         $package->save();
         /*         * ************************************ */
         flash('Package has been added!')->success();
@@ -69,13 +70,14 @@ class PackageController extends Controller
         $package->package_num_days = $request->input('package_num_days');
         $package->package_num_listings = $request->input('package_num_listings');
         $package->package_for = $request->input('package_for');
+        $package->description = $request->input('description');
 
         $package->update();
         flash('Package has been updated!')->success();
         return \Redirect::route('edit.package', array($package->id));
     }
 
-    public function deletePackage(Request $request)
+    public function deletePackage( Request $request)
     {
         $id = $request->input('id');
         try {
@@ -86,7 +88,25 @@ class PackageController extends Controller
             return 'notok';
         }
     }
-
+    public function hidePackage($id,Request $request)
+    {
+        
+        try {
+            $package = Package::findOrFail($id);
+            $package->is_visible = 0 ;
+            $package->update();
+            // flash('The package was successfully hidden!')->success();
+            //  return \Redirect::route('list.packages');
+            return 'ok';
+        } catch (ModelNotFoundException $e) {
+            return 'notok';
+        }catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+        }   
+    }
     public function fetchPackagesData(Request $request)
 {
     $packages = Package::select([
@@ -130,13 +150,18 @@ class PackageController extends Controller
                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
             </li>';
 
+            $hideButton =  '<li>
+                <a href="javascript:void(0);" onclick="hidePackage(' . $packages->id . ');" class="">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i> Hide</a>
+            </li>';
+            
             return '
             <div class="btn-group">
                 <button class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action
                     <i class="fa fa-angle-down"></i>
                 </button>
                 <ul class="dropdown-menu">
-                    ' . $editButton . $deleteButton . '
+                    ' . $editButton . $deleteButton . $hideButton . '
                 </ul>
             </div>';
         })

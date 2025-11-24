@@ -175,8 +175,8 @@
       <div class="modal-body">
         <div class="preuserinfo">
         <h3>{{__('Login or register to create your Resume/CV')}}</h3>
-        <a href="{{route('login')}}" class="btn btn-yellow mt-3">{{__('Login')}}</a>
-        <a href="{{route('register')}}" class="btn btn-dark mt-3">{{__('Register')}}</a>
+        <a href="javascript:void();" class="btn btn-yellow mt-3" data-bs-toggle="modal" data-bs-target="#headlogin" class="nav-link">{{__('Sign in')}}</a>
+        <a href="javascript:void();" class="btn btn-dark mt-3" data-bs-toggle="modal" data-bs-target="#headregister" class="nav-link register">{{__('Register')}}</a>
         </div>
       </div>
       

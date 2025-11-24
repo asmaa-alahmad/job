@@ -70,8 +70,9 @@ use RegistersUsers;
         $company->name = $request->input('name');
         $company->email = $request->input('email');
         $company->password = bcrypt($request->input('password'));
+        $company->save();
         if($settings->auto_approval_company == 1){
-           $company->is_active = 1; 
+            $company->is_active = 1; 
         }else{
             $company->is_active = 0;
         }
@@ -82,13 +83,15 @@ use RegistersUsers;
         $company->slug = Str::slug($company->name, '-') . '-' . $company->id;
         $company->update();
         /*         * ******************** */
+        // dd("hi rama");
 
-        event(new Registered($company));
-        event(new CompanyRegistered($company));
+        // event(new Registered($company));
+        // event(new CompanyRegistered($company));
         $this->guard()->login($company);
-        UserVerification::generate($company);
-        UserVerification::send($company, 'Company Verification', config('mail.recieve_to.address'), config('mail.recieve_to.name'));
+        // UserVerification::generate($company);
+        // UserVerification::send($company, 'Company Verification', config('mail.recieve_to.address'), config('mail.recieve_to.name'));
         return $this->registered($request, $company) ?: redirect($this->redirectPath());
+        // return  redirect($redirectTo);
     }
 
 }

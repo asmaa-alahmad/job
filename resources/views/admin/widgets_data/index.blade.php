@@ -34,48 +34,64 @@
             </div>
             <!-- Page header end -->
             <!-- Page body start -->
-            @if(null!==($widgets))
-            @foreach($widgets as $wid)
+            @if (null !== $widgets)
+    @foreach ($widgets as $wid)
+    {{ $wid->title }}
+        @if (strtolower($wid->title) == 'how it works')
             <?php $widget_data = null; ?>
-            <div class="page-body" id="widget_{{$wid->id}}" style="border:1px solid #eee; padding:35px; margin-bottom: 30px; background:#f5f5f5;">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <!-- Basic Form Inputs card start -->
-                     <div class="card">
-                      <div class="card-header">
-                           <h4>{{$wid->title}} Widget</h4>
+            <div class="page-body" id="widget_{{ $wid->id }}"
+                style="border:1px solid #eee; padding:35px; margin-bottom: 30px; background:#f5f5f5;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Basic Form Inputs card start -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ $wid->title }} Widget</h4>
+                            </div>
+                            <hr>
+                            <div class="card-block">
+
+                                @php
+                                    $widget_data = App\Models\WidgetsData::where('widget_id', $wid->id)->first();
+                                @endphp
+
+                                @if (null !== $widget_data)
+                                    {!! Form::model($widget_data, [
+                                        'method' => 'post',
+                                        'route' => ['admin.widget_data.store', $wid->id],
+                                        'class' => 'form',
+                                        'files' => true,
+                                    ]) !!}
+                                @else
+                                    {!! Form::open([
+                                        'method' => 'post',
+                                        'route' => ['admin.widget_data.store', $wid->id],
+                                        'class' => 'form',
+                                        'files' => true,
+                                    ]) !!}
+                                @endif
+
+                                {!! Form::hidden('id', $wid->id) !!}
+
+                                {{-- Include widget form --}}
+                                @include('admin.widgets_data.inc.form')
+
+                                <div class="row mt-3">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                                    </div>
+                                </div>
+
+                                {!! Form::close() !!}
+                            </div>
                         </div>
-                        <hr>
-                        <div class="card-block">
-                          
-                           <?php 
-
-                              $widget_data = App\Models\WidgetsData::where('widget_id',$wid->id)->first()
-                            ?>
-                          @if(null!==($widget_data))
-                          {!! Form::model($widget_data, array('method' => 'post', 'route' => array('admin.widget_data.store',$wid->id), 'class' => 'form', 'files'=>true)) !!}
-                           
-                          @else
-                          {!! Form::open(array('method' => 'post', 'route' => array('admin.widget_data.store',$wid->id), 'class' => 'form', 'files'=>true)) !!}
-                           
-                          @endif
-                           {!! Form::hidden('id', $wid->id) !!}
-                           @include('admin.widgets_data.inc.form')
-                           <div class="row">
-                              <div class="col-md-5"></div>
-                              <div class="col-md-4"><button type="submit" class="btn btn-primary">{{__('Update')}}</button></div>
-                           </div>
-
-                           {!! Form::close() !!}
-                           
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-            </div>            
-            @endforeach
-            @endif
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endforeach
+@endif
 
 
             <!-- Page body end -->

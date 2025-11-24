@@ -4,13 +4,14 @@
     @include('includes.header')
     <!-- Header end -->
     <!-- Inner Page Title start -->
-    @include('includes.inner_top_search')
+    {{-- @include('includes.inner_top_search') --}}
     <!-- Inner Page Title end -->
-    <div class="about-wraper">
-        <div class="container">
+    <div class="title"></div>
+    <div class="about-wraper bg-grey">
+        <div class="container bg-white padding-50">
 
 
-            <h1>{{ __($cmsContent->page_title) }}</h1>
+            <h2 class="text-center">{{ __($cmsContent->page_title) }}</h2>
             <p>{!! __($cmsContent->page_content) !!}</p>
 
 

@@ -1,17 +1,22 @@
 <?php
+
 namespace App;
+
 use Auth;
-use App\JobSkill;
-use App\CompanyMessage;
-use App\FavouriteCompany;
-use App\FavouriteJob;
 use App\JobApply;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\JobSkill;
+use App\JobTitle;
+use App\FavouriteJob;
+use App\CompanyMessage;
+
+use App\FavouriteCompany;
+use Illuminate\Support\Carbon;
 use App\Traits\CountryStateCity;
 use App\Traits\CommonUserFunctions;
-use Illuminate\Support\Carbon;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -23,10 +28,20 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'first_name', 'last_name', 'email', 'password','email_verified_at','verified',
-        'email_verification_code', 'email_verification_code_expires_at',
-        'email_verification_attempts', 'is_email_verified', 'is_active',
-        'password_reset_code', 'password_reset_code_expires_at'
+        'name',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'email_verified_at',
+        'verified',
+        'email_verification_code',
+        'email_verification_code_expires_at',
+        'email_verification_attempts',
+        'is_email_verified',
+        'is_active',
+        'password_reset_code',
+        'password_reset_code_expires_at'
     ];
     protected $dates = ['created_at', 'updated_at', 'date_of_birth', 'package_start_date', 'package_end_date'];
     /**
@@ -35,7 +50,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
     public function profileSummary()
     {
@@ -241,7 +257,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $image = (!empty($image)) ? $image : 'no-no-image.gif';
         return \ImgUploader::print_image("user_images/$image", $width, $height, '/admin_assets/no-image.png', $this->getName());
     }
-	public function printUserCoverImage($width = 0, $height = 0)
+    public function printUserCoverImage($width = 0, $height = 0)
     {
         $cover_image = (string) $this->cover_image;
         $cover_image = (!empty($cover_image)) ? $cover_image : 'no-no-image.gif';
@@ -288,6 +304,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function jobExperience()
     {
         return $this->belongsTo('App\JobExperience', 'job_experience_id', 'job_experience_id');
+    }
+
+
+    public function jobTitle()
+    {
+        return $this->belongsTo(JobTitle::class, 'job_title_id');
     }
     public function getJobExperience($field = '')
     {

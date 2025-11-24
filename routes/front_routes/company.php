@@ -3,7 +3,7 @@ Route::get('admin/public-company/{id}','AjaxController@companyprofile')->name('p
 Route::get('company/{slug}', 'Company\CompanyController@companyDetail')->name('company.detail');
 Route::get('companies', 'Company\CompaniesController@company_listing')->name('company.listing');
 
-Route::middleware(['auth:company', 'company.verified'])->group(function () {
+Route::middleware(['auth:company'])->group(function () {
 Route::get('company-documents', 'Company\CompanyController@company_documents')->name('company.documents');
 Route::get('company-packages', 'Company\CompanyController@resume_search_packages')->name('company.packages');
 Route::get('unloced-seekers', 'Company\CompanyController@UnlockedUser')->name('company.unloced-users');

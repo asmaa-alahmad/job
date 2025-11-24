@@ -45,6 +45,10 @@ Table Of Index
   src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v200/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1n-q_4MrImHCIJIZrDCvHOej.woff2)
     format("woff2");
 }
+:root {
+  --main-color: #a1c71f;
+  --second-color: #f5a12d;
+}
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
@@ -288,7 +292,9 @@ select {
   font-weight: 300;
 }
 .titleTop h3 i {
-  color: #0357e9;
+  color: transparent;
+  background: linear-gradient(to left, var(--main-color), var(--second-color));
+  background-clip: text;
 }
 .btn-primary {
   border: none;
@@ -322,7 +328,7 @@ select {
   box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
 }
 .btn-yellow {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border: none;
   padding: 15px 25px;
@@ -335,7 +341,7 @@ select {
   color: #000;
 }
 .btn-dark {
-  background: #2a2b32;
+  background: var(--second-color);
   color: #fff;
   border: none;
   padding: 10px 25px;
@@ -661,13 +667,13 @@ h6 {
   background: none;
 }
 .navbar-light .navbar-nav .active > .nav-link {
-  color: #0357e9;
-  border-bottom-color: #0357e9;
+  color: var(--second-color);
+  border-bottom-color: var(--second-color);
 }
 .navbar-expand-lg .navbar-nav .nav-link:hover,
 .navbar-nav > li:hover > a,
 .navbar-nav > li.active > a {
-  color: #0357e9;
+  color: var(--second-color);
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:focus,
@@ -716,14 +722,14 @@ h6 {
   padding-left: 5px;
 }
 .navbar-expand-lg .navbar-nav .nav-item.register a {
-  background: #0357e9;
+  background: var(--second-color);
   color: #fff;
   border-radius: 35px;
   padding: 10px 15px;
   border-bottom: none;
 }
 .navbar-expand-lg .navbar-nav .nav-item.loginbtn a {
-  background: #17d27c;
+  background: var(--main-color);
   color: #fff;
   border-radius: 35px;
   padding: 10px 15px;
@@ -816,6 +822,7 @@ h6 {
   padding-top: 60px;
   padding-bottom: 60px;
   position: relative;
+  height: 60vh;
 }
 .searchwrap:before {
   background: url(../images/background-header1.jpeg) no-repeat;
@@ -1025,7 +1032,7 @@ h3.seekertxt span {
   text-align: center;
 }
 .searchbar .btn {
-  background: #17d27c;
+  background: var(--main-color);
   color: #fff;
   border: none;
   font-size: 16px;
@@ -1880,13 +1887,13 @@ a.wit-btn {
   margin-bottom: 30px;
   width: 100px;
   height: 100px;
-  background: #fff;
+  background: #a1c71f;
   line-height: 100px;
   border-radius: 50px;
 }
 .howlist li .iconcircle span {
   font-size: 48px;
-  color: #666;
+  color: #fff;
 }
 .howlist li h4 {
   font-size: 24px;
@@ -2593,7 +2600,11 @@ figure.effect-ruby:hover p {
 }
 .viewallbtn a {
   display: inline-block;
-  background: linear-gradient(135deg, #0357e9, #003bb8);
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
   color: #fff;
   font-size: 18px;
   font-weight: 600;
@@ -2774,6 +2785,12 @@ label.partTime[title="Rotating"] {
 .userlisting .seekerbox:hover {
   box-shadow: 0 12px 48px #002c6d1a;
   border-color: #0052cc;
+  border-image-source: linear-gradient(
+    to bottom,
+    var(--main-color),
+    var(--second-color) 1 100%
+  );
+  border-image-source: linear-gradient(to left, #00c853, #b2ff59);
 }
 .ltisusrinf {
   display: flex;
@@ -2851,7 +2868,7 @@ label.partTime[title="Rotating"] {
 *************************************************/
 .infodatawrap {
   padding-top: 40px;
-  height:90vh;
+  height: 90vh;
 }
 .userloginbox {
   background: #0357e9;
@@ -5549,7 +5566,7 @@ ul.orderlist li:before {
   z-index: 2;
   transition: 0.4s;
   color: #fff;
-  background: #0357e9;
+  background: var(--main-color);
   font-size: 18px;
   width: 36px;
   height: 36px;
@@ -5568,7 +5585,7 @@ ul.orderlist li:before {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #000;
+  background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
   transform-origin: 100% 50%;
   transform: scaleY(2);
   transition: transform 0.4s, opacity 0.4s;
@@ -5611,10 +5628,10 @@ ul.orderlist li:before {
 }
 .main-plan {
   margin-bottom: 15px;
-  padding: 20px 30px;
+  padding: 6px 30px;
   border-bottom: 1px solid #eee;
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
-  margin-left: -30px;
+  background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
+  margin-left: -16px;
   border-radius: 0 15px 15px 0;
   margin-top: 15px;
 }
@@ -7425,7 +7442,11 @@ blockquote:after {
   display: block;
   width: 160px;
   padding: 10px 0;
-  background-color: #0357e9;
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   font-size: 12px;
@@ -7486,7 +7507,7 @@ blockquote:after {
 .seekerbox .hmcate i {
   width: 18px;
   flex: 0 0 18px;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .seekerbox .listbtn {
   margin-top: 20px;
@@ -7494,7 +7515,11 @@ blockquote:after {
 }
 .seekerbox .listbtn a {
   display: inline-block;
-  background: #0357e9;
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -7626,6 +7651,7 @@ blockquote:after {
   }
   .main-plan .plan-price1-2 {
     font-size: 70px;
+    max-height:20px;
   }
   .main-plan .plan-price1-3 {
     margin-right: 0px;
@@ -10029,4 +10055,57 @@ Large Mobile Screen
   .job-stat-item {
     justify-content: space-between;
   }
+}
+.bg-grey {
+  background-color: #eee;
+}
+.bg-white {
+  background-color: #fff;
+}
+.padding-20 {
+  padding: 20px 20px;
+}
+.padding-50 {
+  padding: 50px 50px;
+}
+.userloginbox.first {
+  background-color: var(--main-color);
+  width: 200px;
+  padding: 10px 20px;
+  margin: auto;
+}
+.userloginbox.first:hover {
+  transition: 1s ease-in-out;
+  background-color: transparent;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+}
+
+.paypackages{
+	width: 90% !important;
+    margin: auto !important;
+}
+.see_more_btn{
+	border: none;
+   background-color: var(--main-color);
+    font-weight: 700;
+    margin-top: 10px;
+    color: #fff;
+    border-radius: 15px;
+    padding: 11px 29px;
+}
+.reqbtn:hover{
+	background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
+  color:white;
+}
+.plan_title{
+	font-weight: 700;
+    font-size: 1.25rem;
+}
+.plan_card{
+	transition: all 0.4s cubic-bezier(.03,.98,.52,.99);
+}
+.plan_card:hover {
+    transform: translateY(-8px) scale(1.05);
+    filter: brightness(1.05);
 }

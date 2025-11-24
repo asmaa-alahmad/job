@@ -28,7 +28,7 @@
                 <div class="portlet light portlet-fit portlet-datatable bordered">
                     <div class="portlet-title">
                         <div class="caption"> <i class="icon-settings font-dark"></i> <span class="caption-subject font-dark sbold uppercase">C.M.S</span> </div>
-                        <div class="actions"> <a href="{{ route('create.cms') }}" class="btn btn-xs btn-succes"><i class="glyphicon glyphicon-plus"></i> Add New C.M.S Page</a> </div>
+                        <div class="actions"> <a href="{{ route('create.cms') }}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-plus"></i> Add New C.M.S Page</a> </div>
                     </div>
                     <div class="portlet-body">
                         <div class="table-container">

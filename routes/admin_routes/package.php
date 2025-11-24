@@ -6,6 +6,7 @@ Route::get('create-package', array_merge(['uses' => 'Admin\PackageController@cre
 Route::post('store-package', array_merge(['uses' => 'Admin\PackageController@storePackage'], $all_users))->name('store.package');
 Route::get('edit-package/{id}', array_merge(['uses' => 'Admin\PackageController@editPackage'], $all_users))->name('edit.package');
 Route::put('update-package/{id}', array_merge(['uses' => 'Admin\PackageController@updatePackage'], $all_users))->name('update.package');
+Route::put('hide-package/{id}', array_merge(['uses' => 'Admin\PackageController@hidePackage'], $all_users))->name('hide.package');
 Route::delete('delete-package', array_merge(['uses' => 'Admin\PackageController@deletePackage'], $all_users))->name('delete.package');
 Route::get('fetch-packages', array_merge(['uses' => 'Admin\PackageController@fetchPackagesData'], $all_users))->name('fetch.data.packages');
 /* * ****** End Package ********** */

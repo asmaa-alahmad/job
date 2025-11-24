@@ -37,8 +37,8 @@ Route::get('/email/verify', [VerificationController::class, 'notice'])->name('ve
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 Route::middleware(['verified'])->group(function(){
-    Route::get('home', 'HomeController@index')->name('home');
 });
+Route::get('home', 'HomeController@index')->name('home');
 Route::get('all-categories', 'IndexController@allCategories')->name('all-categories');
 /* * ******** TypeAheadController ******* */
 Route::get('typeahead-currency_codes', 'TypeAheadController@typeAheadCurrencyCodes')->name('typeahead.currency_codes');

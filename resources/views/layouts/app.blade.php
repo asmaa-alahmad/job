@@ -67,6 +67,7 @@ if (!isset($seo)) {
     <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('/') }}admin_assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin_assets/dashboard_style.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 

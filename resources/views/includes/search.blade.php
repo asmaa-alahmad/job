@@ -1,45 +1,42 @@
-
-
-
 <div class="section searchwrap">
 
-<div class="container">
-    
-    <div class="row text-center">
-        <div class="col-lg-12">
-    
-            <div class="srjobseeker">
-                <div class="bxsrctxt">
-                    <?php $widget =widget(5); ?>
-                    @if(Auth::guard('company')->check())
-                    <h1>{{__('Find Top Skilled Candidates')}}.</h1>
-                    <p>{{__("Simply enter your resume criteria to instantly search from millions of live, top quality resumes")}}</p>
-                    @else
-                    <h1>{{ __($widget->extra_field_1) }}</h1>
-<p>{{ __($widget->extra_field_2) }}</p>
+    <div class="container">
 
-                    @endif
-                    
-                    
+        <div class="row text-center">
+            <div class="col-lg-12">
+
+                <div class="srjobseeker">
+                    <div class="bxsrctxt">
+                        <?php $widget = widget(5); ?>
+                        @if (Auth::guard('company')->check())
+                            <h1>{{ __('Find Top Skilled Candidates') }}.</h1>
+                            <p>{{ __('Simply enter your resume criteria to instantly search from millions of live, top quality resumes') }}
+                            </p>
+                        @else
+                            <h1>{{ __($widget->extra_field_1) }}</h1>
+                            <p>{{ __($widget->extra_field_2) }}</p>
+                        @endif
+
+
+                    </div>
+                    <div class="searchbarbt">
+                        @include('includes.search_form')
+                    </div>
+
+
+
+
                 </div>
-                <div class="searchbarbt">
-                    @include('includes.search_form')
-                </div>
-                
-                
-               
-                
+
             </div>
-   
-        </div>
-        {{-- <div class="col-lg-6">
-            @if((bool)$siteSetting->is_slider_active)
+            {{-- <div class="col-lg-6">
+            @if ((bool) $siteSetting->is_slider_active)
             <!-- Revolution slider start -->
             <div class="tp-banner-container">
                 <div class="tp-banner" >
                     <ul>
-                    @if(isset($sliders) && count($sliders))
-                        @foreach($sliders as $slide)
+                    @if (isset($sliders) && count($sliders))
+                        @foreach ($sliders as $slide)
                         <!--Slide-->
                         <li data-slotamount="7" data-transition="slotzoom-horizontal" data-masterspeed="1000" data-saveperformance="on"> <img alt="{{$slide->slider_heading}}" src="{{asset('/')}}images/dummy.png" data-lazyload="{{ ImgUploader::print_image_src('/slider_images/'.$slide->slider_image) }}">
                             <div class="caption lft large-title tp-resizeme slidertext1" data-x="center" data-y="90" data-speed="600" data-start="1600">{{$slide->slider_heading}}</div>
@@ -65,22 +62,23 @@
 
 
         </div> --}}
-    </div>   
+        </div>
 
+
+        @if (!Auth::user() && !Auth::guard('company')->user())
+            <a href="javascript:void();" data-bs-toggle="modal" data-bs-target="#preresume" class="userloginbox first">
+            @else
+                <a href="{{ url('my-profile') }}" class="userloginbox first ">
+        @endif
+
+        <h3>{{ __('add your cv') }}</h3>
+
+
+
+        </a>
+
+
+
+
+    </div>
 </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

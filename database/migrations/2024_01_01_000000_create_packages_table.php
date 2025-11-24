@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('package_num_days')->nullable()->default(0);
             $table->integer('package_num_listings')->nullable()->default(0);
             $table->enum('package_for', ['job_seeker', 'employer', 'cv_search', 'make_featured'])->nullable()->default('job_seeker');
+            $table->text('description')->nullable();
+            $table->boolean('is_visible')->default(1);
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

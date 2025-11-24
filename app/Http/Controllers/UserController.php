@@ -74,12 +74,12 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
         $profileCv = $user->getDefaultCv();
-        
+
         return view('user.applicant_profile')
-                        ->with('user', $user)
-                        ->with('profileCv', $profileCv)
-                        ->with('page_title', $user->getName())
-                        ->with('form_title', 'Contact ' . $user->getName());
+            ->with('user', $user)
+            ->with('profileCv', $profileCv)
+            ->with('page_title', $user->getName())
+            ->with('form_title', 'Contact ' . $user->getName());
     }
 
     public function myProfile()
@@ -92,20 +92,22 @@ class UserController extends Controller
         $careerLevels = DataArrayHelper::langCareerLevelsArray();
         $industries = DataArrayHelper::langIndustriesArray();
         $functionalAreas = DataArrayHelper::langFunctionalAreasArray();
+        $jobTitles = DataArrayHelper::langJobTitlesArray();
 
         $upload_max_filesize = UploadedFile::getMaxFilesize() / (1048576);
         $user = User::findOrFail(Auth::user()->id);
         return view('user.edit_profile')
-                        ->with('genders', $genders)
-                        ->with('maritalStatuses', $maritalStatuses)
-                        ->with('nationalities', $nationalities)
-                        ->with('countries', $countries)
-                        ->with('jobExperiences', $jobExperiences)
-                        ->with('careerLevels', $careerLevels)
-                        ->with('industries', $industries)
-                        ->with('functionalAreas', $functionalAreas)
-                        ->with('user', $user)
-                        ->with('upload_max_filesize', $upload_max_filesize);
+            ->with('genders', $genders)
+            ->with('maritalStatuses', $maritalStatuses)
+            ->with('nationalities', $nationalities)
+            ->with('countries', $countries)
+            ->with('jobExperiences', $jobExperiences)
+            ->with('careerLevels', $careerLevels)
+            ->with('industries', $industries)
+            ->with('functionalAreas', $functionalAreas)
+            ->with('user', $user)
+            ->with('jobTitles', $jobTitles)
+            ->with('upload_max_filesize', $upload_max_filesize);
     }
 
     public function updateMyProfile(UserFrontFormRequest $request)
@@ -118,16 +120,16 @@ class UserController extends Controller
             $fileName = ImgUploader::UploadImage('user_images', $image, $request->input('name'), 300, 300, false);
             $user->image = $fileName;
         }
-		
-		if ($request->hasFile('cover_image')) {
-			$is_deleted = $this->deleteUserCoverImage($user->id);
+
+        if ($request->hasFile('cover_image')) {
+            $is_deleted = $this->deleteUserCoverImage($user->id);
             $cover_image = $request->file('cover_image');
             $fileName_cover_image = ImgUploader::UploadImage('user_images', $cover_image, $request->input('name'), 1140, 250, false);
             $user->cover_image = $fileName_cover_image;
         }
-		
-		
-		
+
+
+
         /*         * ************************************** */
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
@@ -149,6 +151,7 @@ class UserController extends Controller
         $user->state_id = $request->input('state_id');
         $user->city_id = $request->input('city_id');
         $user->phone = $request->input('phone');
+        $user->job_title_id = $request->input('job_title_id');
         $user->mobile_num = $request->input('mobile_num');
         $user->job_experience_id = $request->input('job_experience_id');
         $user->career_level_id = $request->input('career_level_id');
@@ -159,31 +162,28 @@ class UserController extends Controller
         $user->salary_currency = $request->input('salary_currency');
         $user->video_link = $request->video_link;
         $user->street_address = $request->input('street_address');
-		$user->is_subscribed = $request->input('is_subscribed', 0);
-		
+        $user->is_subscribed = $request->input('is_subscribed', 0);
+
         $user->update();
 
         $this->updateUserFullTextSearch($user);
-		/*************************/
-		Subscription::where('email', 'like', $user->email)->delete();
-		if((bool)$user->is_subscribed)
-		{			
-			$subscription = new Subscription();
-			$subscription->email = $user->email;
-			$subscription->name = $user->name;
-			$subscription->save();
-			
-			/*************************/
+        /*************************/
+        Subscription::where('email', 'like', $user->email)->delete();
+        if ((bool)$user->is_subscribed) {
+            $subscription = new Subscription();
+            $subscription->email = $user->email;
+            $subscription->name = $user->name;
+            $subscription->save();
+
+            /*************************/
 			//Newsletter::subscribeOrUpdate($subscription->email, ['FNAME'=>$subscription->name]);
-			/*************************/
-		}
-		else
-		{
-			/*************************/
+            /*************************/
+        } else {
+            /*************************/
 			//Newsletter::unsubscribe($user->email);
-			/*************************/
-		}
-		
+            /*************************/
+        }
+
         flash(__('You have updated your profile successfully'))->success();
         return \Redirect::route('my.profile');
     }
@@ -213,21 +213,21 @@ class UserController extends Controller
         $companies = Company::whereIn('slug', $companiesSlugArray)->get();
 
         return view('user.following_companies')
-                        ->with('user', $user)
-                        ->with('companies', $companies);
+            ->with('user', $user)
+            ->with('companies', $companies);
     }
 
     public function myMessages()
     {
         $user = User::findOrFail(Auth::user()->id);
         $messages = ApplicantMessage::where('user_id', '=', $user->id)
-                ->orderBy('is_read', 'asc')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->orderBy('is_read', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('user.applicant_messages')
-                        ->with('user', $user)
-                        ->with('messages', $messages);
+            ->with('user', $user)
+            ->with('messages', $messages);
     }
 
     public function applicantMessageDetail($message_id)
@@ -237,8 +237,8 @@ class UserController extends Controller
         $message->update(['is_read' => 1]);
 
         return view('user.applicant_message_detail')
-                        ->with('user', $user)
-                        ->with('message', $message);
+            ->with('user', $user)
+            ->with('message', $message);
     }
 
     public function myAlerts()
@@ -257,141 +257,141 @@ class UserController extends Controller
         $arr = array('msg' => 'A Alert has been successfully deleted. ', 'status' => true);
         return Response()->json($arr);
     }
-    public function ResumeFetch($id) {
+    public function ResumeFetch($id)
+    {
         $user = User::findOrFail($id);
-         $profileCv = $user->getDefaultCv();
-         return view('user.resume')
-                         ->with('user', $user)
-                         ->with('profileCv', $profileCv)
-                         ->with('page_title', $user->getName())
-                         ->with('form_title', 'Contact ' . $user->getName());
+        $profileCv = $user->getDefaultCv();
+        return view('user.resume')
+            ->with('user', $user)
+            ->with('profileCv', $profileCv)
+            ->with('page_title', $user->getName())
+            ->with('form_title', 'Contact ' . $user->getName());
     }
 
 
     public function buildResume()
-{
-    $upload_max_filesize = UploadedFile::getMaxFilesize() / (1048576);
-    $user = User::findOrFail(Auth::user()->id);
+    {
+        $upload_max_filesize = UploadedFile::getMaxFilesize() / (1048576);
+        $user = User::findOrFail(Auth::user()->id);
 
-    return view('user.build_resume')
-        ->with('user', $user)
-        ->with('upload_max_filesize', $upload_max_filesize);
-}
-
-
-public function indexCandidateHistory()
-{
-    $user = auth()->user();
-    
-    // Try to get payment history from payment_history table first
-    $candidatePayments = \App\PaymentHistory::where('user_id', $user->id)
-        ->with('package')
-        ->orderBy('created_at', 'DESC')
-        ->get();
-    
-    // If no records in payment_history, show current package as fallback
-    if ($candidatePayments->isEmpty() && $user->package_id) {
-        // Create a temporary collection with current package data
-        $currentPackage = new \stdClass();
-        $currentPackage->package = $user->getPackage();
-        $currentPackage->payment_method = $user->payment_method ?? 'Admin Assign';
-        $currentPackage->package_start_date = $user->package_id == 9 
-            ? $user->featured_package_start_at 
-            : $user->package_start_date;
-        $currentPackage->package_end_date = $user->package_id == 9 
-            ? $user->featured_package_end_at 
-            : $user->package_end_date;
-        $currentPackage->jobs_quota = $user->jobs_quota ?? 0;
-        $currentPackage->package_type = $user->package_id == 9 ? 'featured_profile' : 'job_seeker';
-        
-        $candidatePayments = collect([$currentPackage]);
+        return view('user.build_resume')
+            ->with('user', $user)
+            ->with('upload_max_filesize', $upload_max_filesize);
     }
-    
-    $siteSetting = \App\SiteSetting::first();
-
-    return view('user.payment_history', compact('candidatePayments', 'siteSetting'));
-}
 
 
+    public function indexCandidateHistory()
+    {
+        $user = auth()->user();
 
+        // Try to get payment history from payment_history table first
+        $candidatePayments = \App\PaymentHistory::where('user_id', $user->id)
+            ->with('package')
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
+        // If no records in payment_history, show current package as fallback
+        if ($candidatePayments->isEmpty() && $user->package_id) {
+            // Create a temporary collection with current package data
+            $currentPackage = new \stdClass();
+            $currentPackage->package = $user->getPackage();
+            $currentPackage->payment_method = $user->payment_method ?? 'Admin Assign';
+            $currentPackage->package_start_date = $user->package_id == 9
+                ? $user->featured_package_start_at
+                : $user->package_start_date;
+            $currentPackage->package_end_date = $user->package_id == 9
+                ? $user->featured_package_end_at
+                : $user->package_end_date;
+            $currentPackage->jobs_quota = $user->jobs_quota ?? 0;
+            $currentPackage->package_type = $user->package_id == 9 ? 'featured_profile' : 'job_seeker';
 
-public function fetchCandidatesHistory(Request $request)
-{
-
-
-    $candidates = User::select('*')->whereNotNull('featured_package_start_at');
-
-    return Datatables::of($candidates)
-        ->filter(function ($query) use ($request) {
-            if ($request->has('name') && !empty($request->name)) {
-                $query->where('users.name', 'like', "%{$request->get('name')}%");
-            }
-            if ($request->has('payment_method') && !empty($request->payment_method)) {
-                $query->where('users.payment_method', 'like', "%{$request->get('payment_method')}%");
-            }
-            if ($request->has('package') && !empty($request->package)) {
-                $query->where('users.package_id', $request->get('package'));
-            }
-            $query->orderBy('featured_package_start_at', 'DESC');
-        })
-        ->addColumn('payment_method', function ($candidates) {
-            return !empty($candidates->payment_method) && $candidates->payment_method !== 'offline'
-                ? $candidates->payment_method
-                : 'Offline (Added by Admin)';
-        })
-        ->addColumn('package', function ($candidates) {
-            $package = Package::find($candidates->package_id);
-            return $package ? $package->package_title : 'N/A';
-        })
-        ->addColumn('package_num_days', function ($candidates) {
-            return $candidates->package_num_days ?? 'N/A';
-        })
-        ->addColumn('featured_package_start_at', function ($candidates) {
-            return $candidates->featured_package_start_at
-                ? date('d-m-Y', strtotime($candidates->featured_package_start_at))
-                : 'N/A';
-        })
-        ->addColumn('featured_package_end_at', function ($candidates) {
-            return $candidates->featured_package_end_at
-                ? date('d-m-Y', strtotime($candidates->featured_package_end_at))
-                : 'N/A';
-        })
-        ->rawColumns(['featured_package_start_at', 'featured_package_end_at'])
-        ->setRowId(function ($candidates) {
-            return 'candidateDtRow' . $candidates->id;
-        })
-        ->make(true);
-}
-
-public function package()
-{
-    $user = Auth::user();
-    $package = $user->getPackage();
-    
-    // Only fetch packages for purchase/upgrade if the feature is enabled
-    // But ALWAYS allow users to see their existing package
-    if ((bool)config('jobseeker.is_jobseeker_package_active')) {
-        if (null !== $package) {
-            // User has package - show upgrade options
-            $packages = Package::where('package_for', 'like', 'job_seeker')
-                ->where('id', '<>', $package->id)
-                ->where('package_price', '>=', $package->package_price)
-                ->get();
-        } else {
-            // User has no package - show all available packages
-            $packages = Package::where('package_for', 'like', 'job_seeker')->get();
+            $candidatePayments = collect([$currentPackage]);
         }
-    } else {
-        // Package system is disabled - don't show any packages for purchase
-        // But user can still see their existing package in the view
-        $packages = collect();
+
+        $siteSetting = \App\SiteSetting::first();
+
+        return view('user.payment_history', compact('candidatePayments', 'siteSetting'));
     }
 
-    return view('user.package')
-        ->with('user', $user)
-        ->with('package', $package)
-        ->with('packages', $packages);
-}
 
+
+
+
+    public function fetchCandidatesHistory(Request $request)
+    {
+
+
+        $candidates = User::select('*')->whereNotNull('featured_package_start_at');
+
+        return Datatables::of($candidates)
+            ->filter(function ($query) use ($request) {
+                if ($request->has('name') && !empty($request->name)) {
+                    $query->where('users.name', 'like', "%{$request->get('name')}%");
+                }
+                if ($request->has('payment_method') && !empty($request->payment_method)) {
+                    $query->where('users.payment_method', 'like', "%{$request->get('payment_method')}%");
+                }
+                if ($request->has('package') && !empty($request->package)) {
+                    $query->where('users.package_id', $request->get('package'));
+                }
+                $query->orderBy('featured_package_start_at', 'DESC');
+            })
+            ->addColumn('payment_method', function ($candidates) {
+                return !empty($candidates->payment_method) && $candidates->payment_method !== 'offline'
+                    ? $candidates->payment_method
+                    : 'Offline (Added by Admin)';
+            })
+            ->addColumn('package', function ($candidates) {
+                $package = Package::find($candidates->package_id);
+                return $package ? $package->package_title : 'N/A';
+            })
+            ->addColumn('package_num_days', function ($candidates) {
+                return $candidates->package_num_days ?? 'N/A';
+            })
+            ->addColumn('featured_package_start_at', function ($candidates) {
+                return $candidates->featured_package_start_at
+                    ? date('d-m-Y', strtotime($candidates->featured_package_start_at))
+                    : 'N/A';
+            })
+            ->addColumn('featured_package_end_at', function ($candidates) {
+                return $candidates->featured_package_end_at
+                    ? date('d-m-Y', strtotime($candidates->featured_package_end_at))
+                    : 'N/A';
+            })
+            ->rawColumns(['featured_package_start_at', 'featured_package_end_at'])
+            ->setRowId(function ($candidates) {
+                return 'candidateDtRow' . $candidates->id;
+            })
+            ->make(true);
+    }
+
+    public function package()
+    {
+        $user = Auth::user();
+        $package = $user->getPackage();
+
+        // Only fetch packages for purchase/upgrade if the feature is enabled
+        // But ALWAYS allow users to see their existing package
+        if ((bool)config('jobseeker.is_jobseeker_package_active')) {
+            if (null !== $package) {
+                // User has package - show upgrade options
+                $packages = Package::where('package_for', 'like', 'job_seeker')
+                    ->where('id', '<>', $package->id)
+                    ->where('package_price', '>=', $package->package_price)
+                    ->get();
+            } else {
+                // User has no package - show all available packages
+                $packages = Package::where('package_for', 'like', 'job_seeker')->get();
+            }
+        } else {
+            // Package system is disabled - don't show any packages for purchase
+            // But user can still see their existing package in the view
+            $packages = collect();
+        }
+
+        return view('user.package')
+            ->with('user', $user)
+            ->with('package', $package)
+            ->with('packages', $packages);
+    }
 }

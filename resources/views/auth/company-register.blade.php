@@ -29,7 +29,7 @@
          <div class="tab-content">
              <div id="employer" class="formpanel mt-0 tab-pane fade active">
                     <h3>{{__('Register as an Employer')}}</h3>
-                 <form class="form-horizontal mt-3" method="POST" action="{{ route('company.register') }}">
+                 <form class="form-horizontal mt-3" method="POST" action="{{ route('company.register') }}"  enctype="multipart/form-data" >
 
                      {{ csrf_field() }}
 
@@ -61,17 +61,17 @@
 
                          <div class="formrow{{ $errors->has('is_subscribed') ? ' has-error' : '' }}">
 
-<?php
+                        <?php
 
-$is_checked = '';
+                        $is_checked = '';
 
-if (old('is_subscribed', 1)) {
+                        if (old('is_subscribed', 1)) {
 
-$is_checked = 'checked="checked"';
+                        $is_checked = 'checked="checked"';
 
-}
+                        }
 
-?>
+                        ?>
 
                          
 
@@ -93,13 +93,7 @@ $is_checked = 'checked="checked"';
 
                          @if ($errors->has('terms_of_use')) <span class="help-block"> <strong>{{ $errors->first('terms_of_use') }}</strong> </span> @endif </div>
 
-                 <div
-                         class="form-group col-12 col-sm-12 col-md-10 text-center mx-auto mobile-padding-no mb-3 {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                         {!! app('captcha')->display() !!}
-                         @if ($errors->has('g-recaptcha-response')) <span class="help-block">
-                             <strong>{{ $errors->first('g-recaptcha-response') }}</strong> </span> @endif
-                     </div>
-
+                
                      <input type="submit" class="btn" value="{{__('Register')}}">
 
                  </form>
@@ -119,7 +113,7 @@ $is_checked = 'checked="checked"';
      </div>
 
  </div>
-        </div>
+        </div> 
 
 
        </div>

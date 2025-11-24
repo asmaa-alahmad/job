@@ -61,6 +61,9 @@
         *On how many jobs a job seeker can apply<br />
         **How many jobs an employer can post
     </div>
+    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'description') !!}"> {!! Form::label('description', 'description', ['class' => 'bold']) !!}
+        {!! Form::text('description', null, array('class'=>'form-control', 'id'=>'description', 'placeholder'=>'description')) !!}
+        {!! APFrmErrHelp::showErrors($errors, 'description') !!} </div>
     
     <div class="form-actions"> {!! Form::button('Update <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>', array('class'=>'btn btn-large btn-primary', 'type'=>'submit')) !!} </div>
 </div>
