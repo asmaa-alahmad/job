@@ -622,6 +622,13 @@ h6 {
   margin-top: 10px;
   display: block;
   margin-bottom: 10px;
+  max-height: 50px;
+  max-width: 100px;
+  overflow: hidden;
+}
+.header .logo img {
+  height: 100%;
+  width: 100%;
 }
 .header.issticky {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
@@ -822,7 +829,7 @@ h6 {
   padding-top: 60px;
   padding-bottom: 60px;
   position: relative;
-  height: 60vh;
+  height: 80vh;
 }
 .searchwrap:before {
   background: url(../images/background-header1.jpeg) no-repeat;
@@ -5585,7 +5592,11 @@ ul.orderlist li:before {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
   transform-origin: 100% 50%;
   transform: scaleY(2);
   transition: transform 0.4s, opacity 0.4s;
@@ -5630,7 +5641,11 @@ ul.orderlist li:before {
   margin-bottom: 15px;
   padding: 6px 30px;
   border-bottom: 1px solid #eee;
-  background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
   margin-left: -16px;
   border-radius: 0 15px 15px 0;
   margin-top: 15px;
@@ -7651,7 +7666,7 @@ blockquote:after {
   }
   .main-plan .plan-price1-2 {
     font-size: 70px;
-    max-height:20px;
+    max-height: 20px;
   }
   .main-plan .plan-price1-3 {
     margin-right: 0px;
@@ -10081,31 +10096,35 @@ Large Mobile Screen
   color: var(--main-color);
 }
 
-.paypackages{
-	width: 90% !important;
-    margin: auto !important;
+.paypackages {
+  width: 90% !important;
+  margin: auto !important;
 }
-.see_more_btn{
-	border: none;
-   background-color: var(--main-color);
-    font-weight: 700;
-    margin-top: 10px;
-    color: #fff;
-    border-radius: 15px;
-    padding: 11px 29px;
+.see_more_btn {
+  border: none;
+  background-color: var(--main-color);
+  font-weight: 700;
+  margin-top: 10px;
+  color: #fff;
+  border-radius: 15px;
+  padding: 11px 29px;
 }
-.reqbtn:hover{
-	background-image: linear-gradient(to right, var(--main-color) 0%, var(--second-color) 100%);
-  color:white;
+.reqbtn:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--main-color) 0%,
+    var(--second-color) 100%
+  );
+  color: white;
 }
-.plan_title{
-	font-weight: 700;
-    font-size: 1.25rem;
+.plan_title {
+  font-weight: 700;
+  font-size: 1.25rem;
 }
-.plan_card{
-	transition: all 0.4s cubic-bezier(.03,.98,.52,.99);
+.plan_card {
+  transition: all 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99);
 }
 .plan_card:hover {
-    transform: translateY(-8px) scale(1.05);
-    filter: brightness(1.05);
+  transform: translateY(-8px) scale(1.05);
+  filter: brightness(1.05);
 }

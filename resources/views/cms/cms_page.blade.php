@@ -6,7 +6,7 @@
     <!-- Inner Page Title start -->
     {{-- @include('includes.inner_top_search') --}}
     <!-- Inner Page Title end -->
-    <div class="title"></div>
+
     <div class="about-wraper bg-grey">
         <div class="container bg-white padding-50">
 
