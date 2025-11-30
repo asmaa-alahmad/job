@@ -44,6 +44,28 @@ Table Of Index
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v200/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1n-q_4MrImHCIJIZrDCvHOej.woff2)
     format("woff2");
+  font-family: "gilroylight";
+  src: url("/webfonts/radomir_tinkov_-_gilroy-light-webfont.woff2")
+      format("woff2"),
+    url("/webfonts/radomir_tinkov_-_gilroy-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "gilroylight";
+  src: url("radomir_tinkov_-_gilroy-light-webfont.woff2") format("woff2"),
+    url("radomir_tinkov_-_gilroy-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "gilroyextrabold";
+  src: url("/webfont/radomir_tinkov_-_gilroy-extrabold-webfont.woff2")
+      format("woff2"),
+    url("/webfont/radomir_tinkov_-_gilroy-extrabold-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 :root {
   --main-color: #a1c71f;
@@ -630,9 +652,13 @@ h6 {
   height: 100%;
   width: 100%;
 }
+.logo > img {
+  max-width: 100px;
+  max-height: 80px;
+}
 .header.issticky {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-  position: fixed;
+  /* position: fixed; */
   z-index: 10;
   width: 100%;
   top: 0;
@@ -872,6 +898,7 @@ h6 {
   font-weight: 700;
 }
 .bxsrctxt h1 {
+  font-family: "gilroylight";
   font-size: 36px;
   color: #000;
   font-weight: 700;

@@ -59,7 +59,7 @@ class JobController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['jobsBySearch', 'jobDetail', 'setStatus','jobApplyExt','postJobApply']]);
+        $this->middleware('auth', ['except' => ['jobsBySearch', 'jobDetail', 'setStatus', 'jobApplyExt', 'postJobApply']]);
 
         $this->functionalAreas = DataArrayHelper::langFunctionalAreasArray();
         $this->countries = DataArrayHelper::langCountriesArray();
@@ -88,14 +88,14 @@ class JobController extends Controller
         $salary_to = $request->query('salary_to', '');
         $salary_currency = $request->query('salary_currency', '');
         $is_featured = $request->query('is_featured', 2);
-        $order_by = $request->query('order_by', 'id');        
+        $order_by = $request->query('order_by', 'id');
         $limit = 24;
         $feature_jobs = Job::where('is_featured', 1)->notExpire()->get();
-        
 
-        
+
+
         $jobs = $this->fetchJobs($search, $job_titles, $company_ids, $industry_ids, $job_skill_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $is_freelance, $career_level_ids, $job_type_ids, $job_shift_ids, $gender_ids, $degree_level_ids, $job_experience_ids, $salary_from, $salary_to, $salary_currency, $is_featured, $order_by, $limit);
-        
+
 
         /*         * ************************************************** */
 
@@ -172,62 +172,62 @@ class JobController extends Controller
 
         $seo = Seo::where('seo.page_title', 'like', 'jobs')->first();
         return view('job.list')
-                        ->with('functionalAreas', $this->functionalAreas)
-                        ->with('countries', $this->countries)
-                        ->with('currencies', array_unique($currencies))
-                        ->with('jobs', $jobs)
-                        ->with('jobTitlesArray', $jobTitlesArray)
-                        ->with('skillIdsArray', $skillIdsArray)
-                        ->with('countryIdsArray', $countryIdsArray)
-                        ->with('stateIdsArray', $stateIdsArray)
-                        ->with('cityIdsArray', $cityIdsArray)
-                        ->with('companyIdsArray', $companyIdsArray)
-                        ->with('industryIdsArray', $industryIdsArray)
-                        ->with('functionalAreaIdsArray', $functionalAreaIdsArray)
-                        ->with('careerLevelIdsArray', $careerLevelIdsArray)
-                        ->with('jobTypeIdsArray', $jobTypeIdsArray)
-                        ->with('jobShiftIdsArray', $jobShiftIdsArray)
-                        ->with('genderIdsArray', $genderIdsArray)
-                        ->with('degreeLevelIdsArray', $degreeLevelIdsArray)
-                        ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
-                        ->with('feature_jobs', $feature_jobs)
-                        ->with('seo', $seo);                        
+            ->with('functionalAreas', $this->functionalAreas)
+            ->with('countries', $this->countries)
+            ->with('currencies', array_unique($currencies))
+            ->with('jobs', $jobs)
+            ->with('jobTitlesArray', $jobTitlesArray)
+            ->with('skillIdsArray', $skillIdsArray)
+            ->with('countryIdsArray', $countryIdsArray)
+            ->with('stateIdsArray', $stateIdsArray)
+            ->with('cityIdsArray', $cityIdsArray)
+            ->with('companyIdsArray', $companyIdsArray)
+            ->with('industryIdsArray', $industryIdsArray)
+            ->with('functionalAreaIdsArray', $functionalAreaIdsArray)
+            ->with('careerLevelIdsArray', $careerLevelIdsArray)
+            ->with('jobTypeIdsArray', $jobTypeIdsArray)
+            ->with('jobShiftIdsArray', $jobShiftIdsArray)
+            ->with('genderIdsArray', $genderIdsArray)
+            ->with('degreeLevelIdsArray', $degreeLevelIdsArray)
+            ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
+            ->with('feature_jobs', $feature_jobs)
+            ->with('seo', $seo);
     }
 
     public function jobDetail(Request $request, $job_slug)
     {
         $job = Job::where('slug', 'like', $job_slug)->firstOrFail();
-        
+
         // Increment view count if num_views column exists
         if (\Schema::hasColumn('jobs', 'num_views')) {
             $job->increment('num_views');
         }
-        
+
         // Get related jobs based on multiple criteria
         $relatedJobs = Job::where('id', '!=', $job->id)
-            ->where(function($query) use ($job) {
+            ->where(function ($query) use ($job) {
                 // Match by functional area
                 $query->orWhere('functional_area_id', $job->functional_area_id);
-                
+
                 // Match by skills
                 $jobSkills = $job->getJobSkillsArray();
                 if (!empty($jobSkills)) {
-                    $query->orWhereHas('jobSkills', function($q) use ($jobSkills) {
+                    $query->orWhereHas('jobSkills', function ($q) use ($jobSkills) {
                         $q->whereIn('job_skill_id', $jobSkills);
                     });
                 }
-                
+
                 // Match by career level
                 $query->orWhere('career_level_id', $job->career_level_id);
-                
+
                 // Match by job type
                 $query->orWhere('job_type_id', $job->job_type_id);
-                
+
                 // Match by location
-                $query->orWhere(function($q) use ($job) {
+                $query->orWhere(function ($q) use ($job) {
                     $q->where('country_id', $job->country_id)
-                      ->orWhere('state_id', $job->state_id)
-                      ->orWhere('city_id', $job->city_id);
+                        ->orWhere('state_id', $job->state_id)
+                        ->orWhere('city_id', $job->city_id);
                 });
             })
             ->where('is_active', 1)
@@ -238,14 +238,14 @@ class JobController extends Controller
             ->get();
 
         $seoArray = $this->getSEO((array) $job->functional_area_id, (array) $job->country_id, (array) $job->state_id, (array) $job->city_id, (array) $job->career_level_id, (array) $job->job_type_id, (array) $job->job_shift_id, (array) $job->gender_id, (array) $job->degree_level_id, (array) $job->job_experience_id);
-        
+
         $seo = (object) array(
             'seo_title' => $job->title,
             'seo_description' => $seoArray['description'],
             'seo_keywords' => $seoArray['keywords'],
             'seo_other' => ''
         );
-        
+
         return view('job.detail')
             ->with('job', $job)
             ->with('relatedJobs', $relatedJobs)
@@ -253,46 +253,39 @@ class JobController extends Controller
     }
 
 
-    public function setStatus(Request $request) {
+    public function setStatus(Request $request)
+    {
 
-      
-        
+
+
         $applied = json_decode($request->applied, true);
         $shortlist = json_decode($request->shortlist, true);
         $hired = json_decode($request->hired, true);
         $rejected = json_decode($request->rejected, true);
-        
-        
 
-        if($applied){
+
+
+        if ($applied) {
             JobApply::whereIn('id', $applied)->update(['status' => 'applied']);
         }
-        if($shortlist){
+        if ($shortlist) {
             JobApply::whereIn('id', $shortlist)->update(['status' => 'shortlist']);
             $updatedJobApplies = JobApply::whereIn('id', $shortlist)->first();
             $job = Job::where('id', $updatedJobApplies->job_id)->first();
-            Mail::send(new JobApplicantStatusMailable($job,$updatedJobApplies,'Short List'));
+            Mail::send(new JobApplicantStatusMailable($job, $updatedJobApplies, 'Short List'));
         }
-        if($hired){
+        if ($hired) {
             $jobbb = JobApply::whereIn('id', $hired)->update(['status' => 'hired']);
             $updatedJobApplies = JobApply::whereIn('id', $hired)->first();
             $job = Job::where('id', $updatedJobApplies->job_id)->first();
-            Mail::send(new JobApplicantStatusMailable($job,$updatedJobApplies,'Approved'));
+            Mail::send(new JobApplicantStatusMailable($job, $updatedJobApplies, 'Approved'));
         }
-        if($rejected){
+        if ($rejected) {
             JobApply::whereIn('id', $rejected)->update(['status' => 'rejected']);
             $updatedJobApplies = JobApply::whereIn('id', $rejected)->first();
             $job = Job::where('id', $updatedJobApplies->job_id)->first();
-            Mail::send(new JobApplicantStatusMailable($job,$updatedJobApplies,'Declined'));
+            Mail::send(new JobApplicantStatusMailable($job, $updatedJobApplies, 'Declined'));
         }
-
-
-        
-        
-        
-        
-
-         
     }
 
 
@@ -316,15 +309,15 @@ class JobController extends Controller
         flash(__('Job has been removed from favorites list'))->success();
         return \Redirect::route('job.detail', $job_slug);
     }
-    
+
     public function jobApplyExt(Request $request, $job_slug)
     {
         $user = Auth::user();
         $job = Job::where('slug', 'like', $job_slug)->first();
 
         return view('job.job_apply_form')
-                        ->with('job_slug', $job_slug)
-                        ->with('job', $job);
+            ->with('job_slug', $job_slug)
+            ->with('job', $job);
     }
     public function postJobApply(Request $request, $job_slug)
     {
@@ -338,40 +331,41 @@ class JobController extends Controller
         $resume = $request->file('cv');
 
         // Generate a unique name for the file
-        $fileName = $request->name.time() . '_' . $resume->getClientOriginalName();
+        $fileName = $request->name . time() . '_' . $resume->getClientOriginalName();
 
         // Move the file to the public/cvs folder
         $resume->move(public_path('unprocessed'), $fileName);
         $jobApply->cv = $fileName;
         $jobApply->save();
+        // dd('applay');
 
         flash(__('You have successfully applied for this job'))->success();
-        $url = $job->application_url; // The URL you want to redirect to
+        // $url = $job->application_url; // The URL you want to redirect to
 
         // Check if the URL has a valid protocol prefix
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            // If not, add the default HTTP prefix
-            $url = "http://" . $url;
-        }
-        $request->session()->flash('message.url', $url);
-        return redirect()->back();
+        // if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        // If not, add the default HTTP prefix
+        //     $url = "http://" . $url;
+        // }
+        // $request->session()->flash('message.url', $url);
+        return redirect()->route('job.detail', $job_slug);
     }
 
     public function applyJob(Request $request, $job_slug)
     {
         $user = Auth::user();
         $job = Job::where('slug', 'like', $job_slug)->first();
-        
+
         if ((bool)$user->is_active === false) {
             flash(__('Your account is inactive contact site admin to activate it'))->error();
             return \Redirect::route('job.detail', $job_slug);
             exit;
         }
-        
+
         if ((bool) config('jobseeker.is_jobseeker_package_active')) {
             if (
-                    ($user->jobs_quota <= $user->availed_jobs_quota) ||
-                    ($user->package_end_date->lt(Carbon::now()))
+                ($user->jobs_quota <= $user->availed_jobs_quota) ||
+                ($user->package_end_date->lt(Carbon::now()))
             ) {
                 flash(__('Please subscribe to package first'))->error();
                 return \Redirect::route('home');
@@ -383,15 +377,15 @@ class JobController extends Controller
             return \Redirect::route('job.detail', $job_slug);
             exit;
         }
-        
-        
+
+
 
         $myCvs = ProfileCv::where('user_id', '=', $user->id)->pluck('title', 'id')->toArray();
 
         return view('job.apply_job_form')
-                        ->with('job_slug', $job_slug)
-                        ->with('job', $job)
-                        ->with('myCvs', $myCvs);
+            ->with('job_slug', $job_slug)
+            ->with('job', $job)
+            ->with('myCvs', $myCvs);
     }
 
     public function postApplyJob(ApplyJobFormRequest $request, $job_slug)
@@ -416,8 +410,8 @@ class JobController extends Controller
         }
         /*         * ******************************* */
         $myCv = ProfileCv::findorFail($request->post('cv_id'));
-        
-        if($job->external_job =='yes'){
+
+        if ($job->external_job == 'yes') {
             $url = $job->job_link; // The URL you want to redirect to
 
             // Check if the URL has a valid protocol prefix
@@ -430,9 +424,9 @@ class JobController extends Controller
 
             return redirect()->away($url)->withHeaders(['target' => '_blank']);
         }
-        
-        event(new JobApplied($job, $jobApply,$myCv));
-        
+
+        event(new JobApplied($job, $jobApply, $myCv));
+
 
         flash(__('You have successfully applied for this job'))->success();
         return \Redirect::route('job.detail', $job_slug);
@@ -445,9 +439,9 @@ class JobController extends Controller
             ->with(['job.company'])
             ->orderBy('created_at', 'desc')
             ->paginate(12);
-        
+
         return view('job.my_applied_jobs')
-                        ->with('appliedJobs', $appliedJobs);
+            ->with('appliedJobs', $appliedJobs);
     }
 
     public function myFavouriteJobs(Request $request)
@@ -455,72 +449,69 @@ class JobController extends Controller
         $myFavouriteJobSlugs = Auth::user()->getFavouriteJobSlugsArray();
         $jobs = Job::whereIn('slug', $myFavouriteJobSlugs)->paginate(10);
         return view('job.my_favourite_jobs')
-                        ->with('jobs', $jobs);
+            ->with('jobs', $jobs);
     }
 
     public function downloadAppliedUsersCsv($jobId)
-{
-    if (!Auth::guard('company')->check()) {
-        return redirect()->route('employer.login'); // Make sure this is the correct login route
-    }
-    $employer = Auth::guard('company')->user();
-
-    $job = Job::findOrFail($jobId);
-    $jobApplications = $job->jobApplications()->with('user')->get();
-
-    $csvContent = "Name,Location,Expected Salary,Experience,Career Level,Phone\n";
-
-    foreach ($jobApplications as $jobApplication) {
-        $user = $jobApplication->user;
-        if ($user) {
-            $csvContent .= "\"{$user->getName()}\",\"{$user->getLocation()}\",\"{$jobApplication->expected_salary} {$jobApplication->salary_currency}\",\"{$user->getJobExperience('job_experience')}\",\"{$user->getCareerLevel('career_level')}\",\"{$user->phone}\"\n";
+    {
+        if (!Auth::guard('company')->check()) {
+            return redirect()->route('employer.login'); // Make sure this is the correct login route
         }
-    }
+        $employer = Auth::guard('company')->user();
 
-    $filename = "applied_users_{$job->title}.csv";
-    return response()->streamDownload(function () use ($csvContent) {
-        echo $csvContent;
-    }, $filename, ['Content-Type' => 'text/csv']);
-}
+        $job = Job::findOrFail($jobId);
+        $jobApplications = $job->jobApplications()->with('user')->get();
 
+        $csvContent = "Name,Location,Expected Salary,Experience,Career Level,Phone\n";
 
-public function downloadCsv(Request $request, $jobId)
-{
-    $job = Job::findOrFail($jobId);
-    $jobApplications = JobApplication::where('job_id', $jobId)->get();
-
-    $csvFileName = "applied_users_{$job->title}.csv";
-
-    $response = new StreamedResponse(function () use ($jobApplications) {
-        $handle = fopen('php://output', 'w');
-
-        // Add CSV headers
-        fputcsv($handle, ['Name', 'Location', 'Expected Salary', 'Experience', 'Career Level', 'Phone']);
-
-        // Add data
         foreach ($jobApplications as $jobApplication) {
-            $user = $jobApplication->getUser();
+            $user = $jobApplication->user;
             if ($user) {
-                fputcsv($handle, [
-                    $user->getName(),
-                    $user->getLocation(),
-                    $jobApplication->expected_salary . ' ' . $jobApplication->salary_currency,
-                    $user->getJobExperience('job_experience'),
-                    $user->getCareerLevel('career_level'),
-                    $user->phone
-                ]);
+                $csvContent .= "\"{$user->getName()}\",\"{$user->getLocation()}\",\"{$jobApplication->expected_salary} {$jobApplication->salary_currency}\",\"{$user->getJobExperience('job_experience')}\",\"{$user->getCareerLevel('career_level')}\",\"{$user->phone}\"\n";
             }
         }
 
-        fclose($handle);
-    });
-
-    $response->headers->set('Content-Type', 'text/csv');
-    $response->headers->set('Content-Disposition', "attachment; filename={$csvFileName}");
-
-    return $response;
-}
+        $filename = "applied_users_{$job->title}.csv";
+        return response()->streamDownload(function () use ($csvContent) {
+            echo $csvContent;
+        }, $filename, ['Content-Type' => 'text/csv']);
+    }
 
 
+    public function downloadCsv(Request $request, $jobId)
+    {
+        $job = Job::findOrFail($jobId);
+        $jobApplications = JobApplication::where('job_id', $jobId)->get();
 
+        $csvFileName = "applied_users_{$job->title}.csv";
+
+        $response = new StreamedResponse(function () use ($jobApplications) {
+            $handle = fopen('php://output', 'w');
+
+            // Add CSV headers
+            fputcsv($handle, ['Name', 'Location', 'Expected Salary', 'Experience', 'Career Level', 'Phone']);
+
+            // Add data
+            foreach ($jobApplications as $jobApplication) {
+                $user = $jobApplication->getUser();
+                if ($user) {
+                    fputcsv($handle, [
+                        $user->getName(),
+                        $user->getLocation(),
+                        $jobApplication->expected_salary . ' ' . $jobApplication->salary_currency,
+                        $user->getJobExperience('job_experience'),
+                        $user->getCareerLevel('career_level'),
+                        $user->phone
+                    ]);
+                }
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', "attachment; filename={$csvFileName}");
+
+        return $response;
+    }
 }
