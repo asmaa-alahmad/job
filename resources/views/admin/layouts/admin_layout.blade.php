@@ -18,6 +18,7 @@
 
     <title>{{ $siteSetting->site_name }} | Admin Login</title>
 
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -25,6 +26,7 @@
     <meta content="" name="description" />
 
     <meta content="" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
@@ -322,19 +324,19 @@
 
         $(document).ready(function(){
 
-                $(document).scrollTo('.msg_cls_for_focus', 2000);
+                    $(document).scrollTo('.msg_cls_for_focus', 2000);
 
-                });
+                    });
 
-                function showProcessingForm(btn_id){		
+                    function showProcessingForm(btn_id){		
 
-                $("#"+btn_id).val( 'Processing .....' );
+                    $("#"+btn_id).val( 'Processing .....' );
 
-                $("#"+btn_id).attr('disabled','disabled');
+                    $("#"+btn_id).attr('disabled','disabled');
 
-                }
+                    }
 
-            </script>
+                </script>
 
 </body>
 

@@ -14,29 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('first_name', 100)->nullable();
-            $table->string('middle_name', 100)->nullable();
             $table->string('last_name', 100)->nullable();
             $table->string('name', 250)->nullable();
             $table->string('email', 100)->nullable()->unique();
-            $table->string('father_name', 100)->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->integer('gender_id')->nullable();
-            $table->integer('marital_status_id')->nullable();
-            $table->integer('nationality_id')->nullable();
-            $table->string('national_id_card_number', 100)->nullable();
             $table->string('country_id', 50)->nullable();
             $table->string('state_id', 50)->nullable();
             $table->string('city_id', 50)->nullable();
-            $table->string('phone', 20)->nullable();
             $table->string('mobile_num', 25)->nullable();
             $table->foreignId('job_title_id')->nullable()->constrained('job_titles')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('job_experience_id')->nullable();
-            $table->integer('career_level_id')->nullable();
-            $table->integer('industry_id')->nullable();
-            $table->integer('functional_area_id')->nullable();
-            $table->string('current_salary', 100)->nullable();
-            $table->string('expected_salary', 100)->nullable();
-            $table->string('salary_currency', 10)->nullable();
+            
             $table->tinyText('street_address')->nullable();
             $table->integer('is_active')->nullable()->default(0);
             $table->boolean('verified')->default(false);
@@ -46,7 +34,7 @@ return new class extends Migration
             $table->string('password', 100)->nullable();
             $table->rememberToken();
             $table->string('image', 100)->nullable();
-            $table->string('cover_image', 100)->nullable();
+            $table->string('cv_document', 100)->nullable();
             $table->string('lang', 10)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

@@ -14,7 +14,7 @@ class WidgetPagesController extends Controller
      *
      * @return void
      */
-   /* public function __construct()
+    /* public function __construct()
     {
         $this->middleware('admin.auth:admin');
     }*/
@@ -31,11 +31,14 @@ class WidgetPagesController extends Controller
         return view('admin.widget_pages.index')->with($data);
     }
 
-    public function add() {
+    public function add()
+    {
         return view('admin.widget_pages.add');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
+        //dd('wed');
         $data = array();
         $data['widget_page'] = WidgetPages::findorFail($id);
         return view('admin.widget_pages.edit')->with($data);
@@ -63,6 +66,7 @@ class WidgetPagesController extends Controller
 
     public function update(Request $request)
     {
+        dd('yes');
         $this->validate($request, [
             'title' => 'required',
         ], [
@@ -70,14 +74,14 @@ class WidgetPagesController extends Controller
         ]);
         $menu_type = WidgetPages::findorFail($request->id);
 
-        if(trim($menu_type->title) != trim($request->title)){
+        if (trim($menu_type->title) != trim($request->title)) {
             $slug = Str::slug($request->title, '-');
             $slugs = unique_slug($slug, 'widget_pages', $field = 'slug', $key = NULL, $value = NULL);
             $menu_type->slug = $slugs;
         }
 
         $menu_type->title = $request->title;
-        
+
         $menu_type->update();
         if ($menu_type->update() == true) {
             $request->session()->flash('message.added', 'success');

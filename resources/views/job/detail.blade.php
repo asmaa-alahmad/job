@@ -31,8 +31,7 @@
                         @if (!(bool) $job->hide_salary)
                             <div class="salary">{{ $job->getSalaryPeriod('salary_period') }}:
                                 <strong>{{ $job->salary_currency . ' ' . $job->salary_from }} -
-                                    {{ $job->salary_currency . ' ' . $job->salary_to }}</strong>
-                            </div>
+                                    {{ $job->salary_currency . ' ' . $job->salary_to }}</strong></div>
                         @endif
                     </div>
                 </div>
@@ -65,16 +64,16 @@
                                         count($user->profileSkills()->get()) == 0;
                                 @endphp
 
-                                @if (0)
+                                @if ($profileIncomplete)
                                     <a href="{{ route('my.profile') }}" class="btn apply"><i
                                             class="fas fa-exclamation-circle" aria-hidden="true"></i>
                                         {{ __('Complete your profile to apply') }}</a>
                                 @else
-                                    @if (1)
+                                    @if (0)
                                         <a href="{{ route('job.apply', $job->slug) }}" class="btn apply"><i
                                                 class="fas fa-paper-plane" aria-hidden="true"></i>
                                             {{ __('Apply Now') }}</a>
-                                    @else
+                                    @elseif(1)
                                         <a href="{{ route('apply.job', $job->slug) }}" class="btn apply"><i
                                                 class="fas fa-paper-plane" aria-hidden="true"></i>
                                             {{ __('Apply Now') }}</a>
@@ -322,8 +321,7 @@
                                         </h4>
                                         @if (!(bool) $relatedJob->hide_salary)
                                             <div class="salary mb-2">Salary:
-                                                <strong>{{ $relatedJob->salary_currency . '' . $relatedJob->salary_from }}
-                                                    -
+                                                <strong>{{ $relatedJob->salary_currency . '' . $relatedJob->salary_from }} -
                                                     {{ $relatedJob->salary_currency . '' . $relatedJob->salary_to }}/{{ $relatedJob->getSalaryPeriod('salary_period') }}</strong>
                                             </div>
                                         @endif

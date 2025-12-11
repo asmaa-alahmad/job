@@ -277,6 +277,7 @@ if(null!==($package)){
     </div>
 
         <div class="text-center mt-5 mb-5">
+           {{ count(auth()->user()->getProfileCvsArray()) }}
         
         @if(count(auth()->user()->getProfileCvsArray())==0 || count(auth()->user()->profileExperience()->get()) == 0 || count(auth()->user()->profileEducation()->get()) == 0 || count(auth()->user()->profileSkills()->get()) == 0)
         <div class="userprofilealert"><h5><i class="fas fa-exclamation-triangle"></i> Your profile is incomplete please update to Download CV.</h5>

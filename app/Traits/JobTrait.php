@@ -75,6 +75,7 @@ use App\SiteSetting;
 use Mail;
 use App\Mail\JobApprovalMailable;
 use App\Mail\JobPostedMailableFront;
+
 trait JobTrait
 
 {
@@ -100,13 +101,10 @@ trait JobTrait
             $job->delete();
 
             return 'ok';
-
         } catch (ModelNotFoundException $e) {
 
             return 'notok';
-
         }
-
     }
 
 
@@ -156,7 +154,6 @@ trait JobTrait
         $job->search = $str;
 
         $job->update();
-
     }
 
 
@@ -210,7 +207,6 @@ trait JobTrait
         $job->job_link = $request->input('job_link');
 
         return $job;
-
     }
 
 
@@ -247,32 +243,31 @@ trait JobTrait
 
         return view('admin.job.add')
 
-                        ->with('companies', $companies)
+            ->with('companies', $companies)
 
-                        ->with('countries', $countries)
+            ->with('countries', $countries)
 
-                        ->with('currencies', array_unique($currencies))
+            ->with('currencies', array_unique($currencies))
 
-                        ->with('careerLevels', $careerLevels)
+            ->with('careerLevels', $careerLevels)
 
-                        ->with('functionalAreas', $functionalAreas)
+            ->with('functionalAreas', $functionalAreas)
 
-                        ->with('jobTypes', $jobTypes)
+            ->with('jobTypes', $jobTypes)
 
-                        ->with('jobShifts', $jobShifts)
+            ->with('jobShifts', $jobShifts)
 
-                        ->with('genders', $genders)
+            ->with('genders', $genders)
 
-                        ->with('jobExperiences', $jobExperiences)
+            ->with('jobExperiences', $jobExperiences)
 
-                        ->with('jobSkills', $jobSkills)
+            ->with('jobSkills', $jobSkills)
 
-                        ->with('jobSkillIds', $jobSkillIds)
+            ->with('jobSkillIds', $jobSkillIds)
 
-                        ->with('degreeLevels', $degreeLevels)
+            ->with('degreeLevels', $degreeLevels)
 
-                        ->with('salaryPeriods', $salaryPeriods);
-
+            ->with('salaryPeriods', $salaryPeriods);
     }
 
 
@@ -316,7 +311,6 @@ trait JobTrait
         flash('Job has been added!')->success();
 
         return \Redirect::route('edit.job', array($job->id));
-
     }
 
 
@@ -357,34 +351,33 @@ trait JobTrait
 
         return view('admin.job.edit')
 
-                        ->with('companies', $companies)
+            ->with('companies', $companies)
 
-                        ->with('countries', $countries)
+            ->with('countries', $countries)
 
-                        ->with('currencies', array_unique($currencies))
+            ->with('currencies', array_unique($currencies))
 
-                        ->with('careerLevels', $careerLevels)
+            ->with('careerLevels', $careerLevels)
 
-                        ->with('functionalAreas', $functionalAreas)
+            ->with('functionalAreas', $functionalAreas)
 
-                        ->with('jobTypes', $jobTypes)
+            ->with('jobTypes', $jobTypes)
 
-                        ->with('jobShifts', $jobShifts)
+            ->with('jobShifts', $jobShifts)
 
-                        ->with('genders', $genders)
+            ->with('genders', $genders)
 
-                        ->with('jobExperiences', $jobExperiences)
+            ->with('jobExperiences', $jobExperiences)
 
-                        ->with('jobSkills', $jobSkills)
+            ->with('jobSkills', $jobSkills)
 
-                        ->with('jobSkillIds', $jobSkillIds)
+            ->with('jobSkillIds', $jobSkillIds)
 
-                        ->with('degreeLevels', $degreeLevels)
+            ->with('degreeLevels', $degreeLevels)
 
-                        ->with('salaryPeriods', $salaryPeriods)
+            ->with('salaryPeriods', $salaryPeriods)
 
-                        ->with('job', $job);
-
+            ->with('job', $job);
     }
 
 
@@ -430,7 +423,6 @@ trait JobTrait
         flash('Job has been updated!')->success();
 
         return \Redirect::route('edit.job', array($job->id));
-
     }
 
 
@@ -447,45 +439,40 @@ trait JobTrait
 
         $company = Auth::guard('company')->user();
 
-		
 
-		if ((bool)$company->is_active === false) {
+
+        if ((bool)$company->is_active === false) {
 
             flash(__('Your account is inactive contact site admin to activate it'))->error();
 
             return \Redirect::route('company.home');
 
             exit;
-
         }
 
-		if((bool)config('company.is_company_package_active')){
+        if ((bool)config('company.is_company_package_active')) {
 
-			if(
+            if (
 
-				($company->package_end_date === null) || 
+                ($company->package_end_date === null) ||
 
-				(Carbon::parse($company->package_end_date)->lt(Carbon::now())) ||
+                (Carbon::parse($company->package_end_date)->lt(Carbon::now())) ||
 
-				($company->jobs_quota <= $company->availed_jobs_quota)
+                ($company->jobs_quota <= $company->availed_jobs_quota)
 
-				)
+            ) {
 
-			{
+                flash(__('Please subscribe to package first'))->error();
 
-				flash(__('Please subscribe to package first'))->error();
+                return \Redirect::route('company.home');
 
-				return \Redirect::route('company.home');
+                exit;
+            }
+        }
 
-				exit;
 
-			}
 
-		}
-
-        
-
-		$countries = DataArrayHelper::langCountriesArray();
+        $countries = DataArrayHelper::langCountriesArray();
 
         $currencies = DataArrayHelper::currenciesArray();
 
@@ -513,70 +500,69 @@ trait JobTrait
 
         return view('job.add_edit_job')
 
-                        ->with('countries', $countries)
+            ->with('countries', $countries)
 
-                        ->with('currencies', array_unique($currencies))
+            ->with('currencies', array_unique($currencies))
 
-                        ->with('careerLevels', $careerLevels)
+            ->with('careerLevels', $careerLevels)
 
-                        ->with('functionalAreas', $functionalAreas)
+            ->with('functionalAreas', $functionalAreas)
 
-                        ->with('jobTypes', $jobTypes)
+            ->with('jobTypes', $jobTypes)
 
-                        ->with('jobShifts', $jobShifts)
+            ->with('jobShifts', $jobShifts)
 
-                        ->with('genders', $genders)
+            ->with('genders', $genders)
 
-                        ->with('jobExperiences', $jobExperiences)
+            ->with('jobExperiences', $jobExperiences)
 
-                        ->with('jobSkills', $jobSkills)
+            ->with('jobSkills', $jobSkills)
 
-                        ->with('jobSkillIds', $jobSkillIds)
+            ->with('jobSkillIds', $jobSkillIds)
 
-                        ->with('degreeLevels', $degreeLevels)
+            ->with('degreeLevels', $degreeLevels)
 
-                        ->with('salaryPeriods', $salaryPeriods);
-
+            ->with('salaryPeriods', $salaryPeriods);
     }
 
 
 
     public function storeFrontJob(JobFrontFormRequest $request)
-{
-    $settings = SiteSetting::findOrFail(1272);
-    $company = Auth::guard('company')->user();
+    {
+        $settings = SiteSetting::findOrFail(1272);
+        $company = Auth::guard('company')->user();
 
-    $job = new Job();
-    $job->company_id = $company->id;
-    $job = $this->assignJobValues($job, $request);
-    $job->save();
+        $job = new Job();
+        $job->company_id = $company->id;
+        $job = $this->assignJobValues($job, $request);
+        $job->save();
 
-    // Generate slug
-    $job->slug = Str::slug($job->title, '-') . '-' . $job->id;
+        // Generate slug
+        $job->slug = Str::slug($job->title, '-') . '-' . $job->id;
 
-    // Set active status based on auto approval setting
-    $job->is_active = ($settings->auto_approval_job == 1) ? 1 : 0;
-    $job->update();
+        // Set active status based on auto approval setting
+        $job->is_active = ($settings->auto_approval_job == 1) ? 1 : 0;
+        $job->update();
 
-    // Store skills and update search index
-    $this->storeJobSkills($request, $job->id);
-    $this->updateFullTextSearch($job);
+        // Store skills and update search index
+        $this->storeJobSkills($request, $job->id);
+        $this->updateFullTextSearch($job);
 
-    // Update company's job quota
-    $company->availed_jobs_quota += 1;
-    $company->update();
+        // Update company's job quota
+        $company->availed_jobs_quota += 1;
+        $company->update();
 
-    // Email and event logic based on active status
-    if ($job->is_active == 1) {
-        Mail::send(new JobApprovalMailable($job));
-        event(new JobPosted($job));
-    } else {
-        Mail::send(new JobPostedMailableFront($job));
+        // Email and event logic based on active status
+        // if ($job->is_active == 1) {
+        //     Mail::send(new JobApprovalMailable($job));
+        //     event(new JobPosted($job));
+        // } else {
+        //     Mail::send(new JobPostedMailableFront($job));
+        // }
+
+        flash('Job has been added!')->success();
+        return Redirect::route('posted.jobs');
     }
-
-    flash('Job has been added!')->success();
-    return Redirect::route('posted.jobs');
-}
 
 
 
@@ -615,32 +601,31 @@ trait JobTrait
 
         return view('job.add_edit_job')
 
-                        ->with('countries', $countries)
+            ->with('countries', $countries)
 
-                        ->with('currencies', array_unique($currencies))
+            ->with('currencies', array_unique($currencies))
 
-                        ->with('careerLevels', $careerLevels)
+            ->with('careerLevels', $careerLevels)
 
-                        ->with('functionalAreas', $functionalAreas)
+            ->with('functionalAreas', $functionalAreas)
 
-                        ->with('jobTypes', $jobTypes)
+            ->with('jobTypes', $jobTypes)
 
-                        ->with('jobShifts', $jobShifts)
+            ->with('jobShifts', $jobShifts)
 
-                        ->with('genders', $genders)
+            ->with('genders', $genders)
 
-                        ->with('jobExperiences', $jobExperiences)
+            ->with('jobExperiences', $jobExperiences)
 
-                        ->with('jobSkills', $jobSkills)
+            ->with('jobSkills', $jobSkills)
 
-                        ->with('jobSkillIds', $jobSkillIds)
+            ->with('jobSkillIds', $jobSkillIds)
 
-                        ->with('degreeLevels', $degreeLevels)
+            ->with('degreeLevels', $degreeLevels)
 
-                        ->with('salaryPeriods', $salaryPeriods)
+            ->with('salaryPeriods', $salaryPeriods)
 
-                        ->with('job', $job);
-
+            ->with('job', $job);
     }
 
 
@@ -650,11 +635,11 @@ trait JobTrait
     {
 
         $job = Job::findOrFail($id);
-        
+
         // Check if the job was expired before the update
         $wasExpired = $job->expiry_date && $job->expiry_date < now();
 
-		$job = $this->assignJobValues($job, $request);
+        $job = $this->assignJobValues($job, $request);
 
         /*         * ******************************* */
 
@@ -667,7 +652,7 @@ trait JobTrait
         /*         * ************************************ */
 
         $job->update();
-        
+
         if ($wasExpired) {
             $company = Auth::guard('company')->user();
             $company->availed_jobs_quota = $company->availed_jobs_quota + 1;
@@ -687,7 +672,6 @@ trait JobTrait
         flash('Job has been updated!')->success();
 
         return \Redirect::route('posted.jobs');
-
     }
 
 
@@ -752,17 +736,12 @@ trait JobTrait
 
     }
 
-    
+
 
     public function isJobExpired()
 
     {
 
-        return ($this->expiry_date < Carbon::now())? true:false;
-
+        return ($this->expiry_date < Carbon::now()) ? true : false;
     }
-
-
-
 }
-

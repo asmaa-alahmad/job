@@ -22746,3 +22746,27 @@ body[ng-controller] .modal {
   max-width: 100px !important;
   max-height: 100px !important;
 }
+.text-red-600 {
+  color: red !important;
+}
+.text-green-600 {
+  color: #238d02 !important;
+}
+.text-info-600 {
+  color: #0ab2bc !important;
+}
+.pending {
+  background-color: #ffc107 !important;
+  border: 1px solid #ffc107;
+}
+.active_statuse {
+  background-color: #198754 !important;
+  border: none;
+}
+.not_active {
+  background-color: #dc3545 !important;
+  border: none;
+}
+.pr-2 {
+  padding-right: 4px;
+}

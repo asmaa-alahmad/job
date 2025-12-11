@@ -28,7 +28,7 @@
                     class="icon-home"></i> <span class="title">Dashboard</span> </a> </li>
         @include('admin/shared/side_bars/admin_user')
 
-        
+
         <li class="heading">
             <h3 class="uppercase">Modules</h3>
         </li>
@@ -36,21 +36,22 @@
         @include('admin/shared/side_bars/cms')
         @include('admin/shared/side_bars/how_it_work')
         @include('admin/shared/side_bars/site_user')
+        @include('admin/shared/side_bars/candidate_selection')
 
 
         <li class="heading">
-                <h3 class="uppercase">Packages</h3>
-            </li>
-            @include('admin/shared/side_bars/package')
-  
-            
+            <h3 class="uppercase">Packages</h3>
+        </li>
+        @include('admin/shared/side_bars/package')
+
+
         <li class="heading">
             <h3 class="uppercase">Manage</h3>
         </li>
 
         @include('admin/shared/side_bars/job')
         @include('admin/shared/side_bars/company')
-        
+
 
         @include('admin/shared/side_bars/blogs')
         @include('admin/shared/side_bars/seo')
@@ -78,7 +79,7 @@
             @include('admin/shared/side_bars/city')
 
 
-            
+
             <li class="heading">
                 <h3 class="uppercase">Transitions</h3>
             </li>

@@ -93,20 +93,38 @@ class IndexController extends Controller
         $companyCount = Company::active()->count();
         //dd($seeker);
         $search = $request->query('search', '');
-        $functional_area_ids = $request->query('functional_area_id', array());
+        // $functional_area_ids = $request->query('functional_area_id', array());
         $country_ids = $request->query('country_id', array());
         $state_ids = $request->query('state_id', array());
         $city_ids = $request->query('city_id', array());
         $career_level_ids = $request->query('career_level_id', array());
-        $gender_ids = $request->query('gender_id', array());
-        $industry_ids = $request->query('industry_ids', array());
+        // $gender_ids = $request->query('gender_id', array());
+        // $industry_ids = $request->query('industry_ids', array());
         $job_experience_ids = $request->query('job_experience_id', array());
-        $current_salary = $request->query('current_salary', '');
-        $expected_salary = $request->query('expected_salary', '');
-        $salary_currency = $request->query('salary_currency', '');
+        // $current_salary = $request->query('current_salary', '');
+        // $expected_salary = $request->query('expected_salary', '');
+        // $salary_currency = $request->query('salary_currency', '');
         $order_by = $request->query('order_by', 'id');
         $limit = 8;
-        $jobSeekers = $this->fetchJobSeekers($search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency, $order_by, $limit, 1);
+        $jobSeekers = $this->fetchJobSeekers($search, [], $city_ids,   $job_experience_ids, $order_by, $limit, 1);
+        $jobSeekers = $this->fetchJobSeekers(
+            $search,              // search
+            [],                   // industry_ids
+            [],                   // functional_area_ids
+            [],                   // country_ids
+            [],                   // state_ids
+            $city_ids,            // city_ids
+            [],                   // career_level_ids
+            [],                   // gender_ids
+            $job_experience_ids,  // job_experience_ids
+            0,                    // current_salary
+            0,                    // expected_salary
+            '',                   // salary_currency
+            $order_by,            // order_by
+            $limit,               // limit
+            1                     // featured
+        );
+      //dd($jobSeekers);
 
 
         $seo = SEO::where('seo.page_title', 'like', 'front_index_page')->first();

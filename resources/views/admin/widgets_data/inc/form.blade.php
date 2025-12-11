@@ -22,7 +22,6 @@
 
 
 
-
     @if ($wid->extra_fields)
         @for ($i = 1; $i <= $wid->extra_fields; $i++)
             <div class="col-md-6">

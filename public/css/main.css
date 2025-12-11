@@ -35,15 +35,26 @@ Table Of Index
 /************************************************
            ==Start Base css==
 *************************************************/
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800|Open+Sans:400,400i,600,700&display=swap");
-/* CSS Reset */
-/* fallback */
-@font-face {
+/* Material Symbols Outlined */
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+.material-symbols-outlined {
   font-family: "Material Symbols Outlined";
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v200/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1n-q_4MrImHCIJIZrDCvHOej.woff2)
-    format("woff2");
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+@font-face {
   font-family: "gilroylight";
   src: url("/webfonts/radomir_tinkov_-_gilroy-light-webfont.woff2")
       format("woff2"),
@@ -51,13 +62,7 @@ Table Of Index
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: "gilroylight";
-  src: url("radomir_tinkov_-_gilroy-light-webfont.woff2") format("woff2"),
-    url("radomir_tinkov_-_gilroy-light-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+
 @font-face {
   font-family: "gilroyextrabold";
   src: url("/webfont/radomir_tinkov_-_gilroy-extrabold-webfont.woff2")
@@ -68,8 +73,8 @@ Table Of Index
   font-style: normal;
 }
 :root {
-  --main-color: #a1c71f;
-  --second-color: #f5a12d;
+  --main-color: #77a938;
+  --second-color: #e86424;
 }
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
@@ -230,7 +235,7 @@ a {
   -webkit-transition: 0.3s ease-in-out;
   -ms-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
-  color: #0357e9;
+  color: var(--main-color);
   text-decoration: none;
 }
 a:hover {
@@ -294,7 +299,7 @@ select {
 .titleTop .subtitle {
   font-size: 18px;
   font-weight: 600;
-  color: #0357e9;
+  color: var(--second-color);
   letter-spacing: 3px;
 }
 .titleTop h3 {
@@ -310,7 +315,7 @@ select {
   margin-bottom: 30px;
 }
 .titleTop h3 span {
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 300;
 }
 .titleTop h3 i {
@@ -535,7 +540,7 @@ h6 {
   margin-right: 10px;
 }
 .mt-list-style-blue {
-  color: #0357e9;
+  color: var(--main-color);
 }
 /*Buttons*/
 .mt-style-button {
@@ -548,7 +553,7 @@ h6 {
   padding: 0 20px;
 }
 .mt-style-button1 .mt-style-button {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border-radius: 3px;
 }
@@ -599,16 +604,16 @@ h6 {
   text-decoration: none;
 }
 .mt-style-button2 .mt-style-button:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border-radius: 3px;
   text-decoration: none;
 }
 .mt-style-button3 .mt-style-button:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border-radius: 3px;
-  border: 2px solid #0357e9;
+  border: 2px solid var(--main-color);
   text-decoration: none;
 }
 .mt-style-button41 .mt-style-button:hover {
@@ -738,7 +743,7 @@ h6 {
   font-size: 14px;
 }
 .navbar-expand-lg .navbar-nav .dropdown-menu > li > a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .navbar-collapse.in {
@@ -769,7 +774,7 @@ h6 {
   border-bottom: none;
 }
 .navbar-expand-lg .navbar-nav .nav-item.foruserbtn a {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border-radius: 35px;
   padding: 10px 15px;
@@ -817,7 +822,7 @@ h6 {
 }
 .navbar-expand-lg .navbar-nav .nav-item.loginlink a {
   padding-right: 5px;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .mobilenav {
   display: none;
@@ -1096,7 +1101,7 @@ h3.seekertxt span {
   margin-right: 10px;
 }
 .getstarted a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   text-decoration: none;
 }
 .slidersearch .searchbar {
@@ -1160,7 +1165,7 @@ h3.seekertxt span {
   font-size: 18px;
 }
 #map-section .btn {
-  background: #0357e9;
+  background: var(--main-color);
   border-radius: 0;
   color: #fff;
   border: none;
@@ -1188,7 +1193,7 @@ h3.seekertxt span {
 }
 .searchblack h3 span {
   display: block;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 700;
 }
 .preuserinfo {
@@ -1872,7 +1877,7 @@ a.wit-btn {
   padding: 10px 30px;
   text-transform: capitalize !important;
   text-align: left;
-  background: #0357e9;
+  background: var(--main-color);
   font-family: "Montserrat", sans-serif;
   border-radius: 45px;
 }
@@ -1921,7 +1926,7 @@ a.wit-btn {
   margin-bottom: 30px;
   width: 100px;
   height: 100px;
-  background: #a1c71f;
+  background: var(--main-color);
   line-height: 100px;
   border-radius: 50px;
 }
@@ -1971,7 +1976,7 @@ a.wit-btn {
 }
 .statsbox .col:nth-child(1) h4,
 .statsbox .col:nth-child(1) i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .statsbox .col:nth-child(2) h4,
 .statsbox .col:nth-child(2) i {
@@ -1979,7 +1984,7 @@ a.wit-btn {
 }
 .statsbox .col:nth-child(3) h4,
 .statsbox .col:nth-child(3) i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .popularind {
   margin-top: 30px;
@@ -1998,7 +2003,7 @@ a.wit-btn {
   margin-bottom: 8px;
 }
 .hmindlist li a {
-  border-left: 1px solid #0357e9;
+  border-left: 1px solid var(--main-color);
   padding: 10px 15px;
   display: block;
   margin: 5px 5px 5px 0;
@@ -2007,7 +2012,7 @@ a.wit-btn {
   background: #fff;
 }
 .hmindlist li a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .citieswrap {
@@ -2172,7 +2177,7 @@ figure.effect-ruby:hover p {
   text-align: center;
 }
 .employerList li .empint:hover {
-  border-color: #0357e9;
+  border-color: var(--main-color);
   transform: translateY(-3px);
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
   box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
@@ -2272,7 +2277,7 @@ figure.effect-ruby:hover p {
   min-height: auto;
 }
 .compnaieslist .emptbox h4:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .compnaieslist .text-info-right .emloc {
   color: #8c96a3;
@@ -2293,7 +2298,7 @@ figure.effect-ruby:hover p {
   font-size: 16px;
 }
 .compnaieslist li:hover .cm-info-bottom span {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .compnaieslist li .indst {
@@ -2317,11 +2322,11 @@ figure.effect-ruby:hover p {
 .compnaieslist li .compint{background: #fff; padding:10px; border: 1px solid #e4e4e4;}
 .compnaieslist li .imgwrap{min-height: 240px; max-height: 240px; overflow: hidden; margin-bottom: 10px;}
 .compnaieslist li .imgwrap img{width: 100%;}
-.compnaieslist li:hover .compint{box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid #0357e9;}
-.compnaieslist li h3 a{font-size: 18px; color:#0357e9 ;}
+.compnaieslist li:hover .compint{box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 1px solid var(--main-color);}
+.compnaieslist li h3 a{font-size: 18px; color:var(--main-color) ;}
 .compnaieslist li .loctext{margin-bottom: 10px;}
 .compnaieslist li i {
-    color: #0357e9;
+    color: var(--main-color);
     width: 18px;
     text-align: left;
 }
@@ -2354,7 +2359,7 @@ figure.effect-ruby:hover p {
   display: flex;
   background: #fff;
   box-shadow: 0 1px 5px 0 #c3cdd7;
-  border-left: 5px solid #0357e9;
+  border-left: 5px solid var(--main-color);
   border-radius: 4px;
   color: #000;
   padding: 15px 30px 15px 20px;
@@ -2370,7 +2375,7 @@ figure.effect-ruby:hover p {
   border-left-color: #000;
 }
 .catelist li span {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .categorylisting li .catecard {
   padding: 20px 10px;
@@ -2399,11 +2404,11 @@ figure.effect-ruby:hover p {
   background: #e9eff3;
   padding: 4px 15px;
   font-size: 14px;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 400;
 }
 .categorylisting li .catecard:hover h3 {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .intcategorylisting li .catecard {
   padding: 20px 10px;
@@ -2432,17 +2437,17 @@ figure.effect-ruby:hover p {
   background: #e9eff3;
   padding: 4px 15px;
   font-size: 14px;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 400;
 }
 .intcategorylisting li .catecard:hover h3 {
-  color: #0357e9;
+  color: var(--main-color);
 }
 /***************************
 		Searh Tabs
 ***************************/
 .tabswrap {
-  border-bottom: 3px solid #0357e9;
+  border-bottom: 3px solid var(--main-color);
 }
 .tabswrap .nav-tabs {
   border-bottom: none;
@@ -2462,9 +2467,9 @@ figure.effect-ruby:hover p {
 }
 .tabswrap .nav-tabs > li > a.active,
 .tabswrap .nav-tabs > li > a.active:focus {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
-  border-color: #0357e9;
+  border-color: var(--main-color);
   border-radius: 5px 5px 0 0;
   font-weight: 700;
 }
@@ -2481,7 +2486,7 @@ figure.effect-ruby:hover p {
 }
 .tabswrap .nav-tabs > li.last a:hover {
   border: none;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .largebanner {
   text-align: left;
@@ -2538,7 +2543,7 @@ figure.effect-ruby:hover p {
 }
 .jobslist li .jobint:hover {
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-  border-color: #0357e9;
+  border-color: var(--main-color);
 }
 .jobslist li .col-md-7,
 .jobslist li .col-md-9 {
@@ -2553,14 +2558,14 @@ figure.effect-ruby:hover p {
   font-weight: 700;
 }
 .jobslist li h4 a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .jobslist li .company {
   color: #999;
   padding: 7px 0;
 }
 .jobslist li .company a {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .jobslist li .jobloc {
   color: #000;
@@ -2571,15 +2576,15 @@ figure.effect-ruby:hover p {
 .jobslist li .applybtn {
   background: #fff;
   display: inline-block;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 600;
   padding: 9px 13px;
   margin-top: 20px;
-  border: 1px solid #0357e9;
+  border: 1px solid var(--main-color);
   border-radius: 45px;
 }
 .jobslist li .applybtn:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   text-decoration: none;
 }
@@ -2670,7 +2675,7 @@ figure.effect-ruby:hover p {
 }
 
 .viewallbtn a:hover {
-  background: linear-gradient(135deg, #003bb8, #022f91);
+  background: linear-gradient(135deg, var(--main-color), var(--main-color));
   transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(3, 87, 233, 0.4);
   text-decoration: none;
@@ -2744,7 +2749,7 @@ label.partTime[title="Rotating"] {
   position: relative;
 }
 .featuredlist .jobint:hover {
-  border-color: #0357e9;
+  border-color: var(--main-color);
   transform: translateY(-3px);
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
   box-shadow: 0px 0 30px rgba(94, 94, 94, 0.1);
@@ -2768,13 +2773,13 @@ label.partTime[title="Rotating"] {
   color: #000;
 }
 .featuredlist .jobint h4 a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .featuredlist .jobint strong {
   font-weight: 700;
 }
 .featuredlist .jobint strong i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .featuredlist .jobint span {
   color: #999;
@@ -2905,7 +2910,7 @@ label.partTime[title="Rotating"] {
   height: 90vh;
 }
 .userloginbox {
-  background: #0357e9;
+  background: var(--main-color);
   padding: 30px 40px;
   padding-right: 110px;
   display: block;
@@ -2914,7 +2919,7 @@ label.partTime[title="Rotating"] {
   position: relative;
 }
 .userloginbox.postjobbox {
-  background: #17d27c;
+  background: var(--second-color);
 }
 .userloginbox img {
   position: absolute;
@@ -2925,6 +2930,7 @@ label.partTime[title="Rotating"] {
 }
 .userloginbox h3 {
   font-weight: 700;
+  margin-bottom: 0px !important;
 }
 .userloginbox:hover {
   background: #6803e9;
@@ -3029,7 +3035,7 @@ label.partTime[title="Rotating"] {
 .testimonialsList li .clientinfo {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
-  color: #0357e9;
+  color: var(--main-color);
   margin-bottom: 15px;
 }
 /************************************************
@@ -3131,7 +3137,7 @@ label.partTime[title="Rotating"] {
   font-weight: bold;
 }
 .buildpagebtn a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 /************************************************
            == Search List css==
@@ -3183,7 +3189,7 @@ label.partTime[title="Rotating"] {
   background: #fff;
   padding: 10px;
   border-radius: 15px;
-  border: 1px solid #0357e9;
+  border: 1px solid var(--main-color);
 }
 .searchform .input-group {
   gap: 10px;
@@ -3201,7 +3207,7 @@ label.partTime[title="Rotating"] {
   appearance: auto;
 }
 .searchform .btn {
-  background: #17d27c;
+  background: var(--second-color);
   font-size: 16px;
   color: #fff;
   padding: 14px 20px;
@@ -3228,7 +3234,7 @@ label.partTime[title="Rotating"] {
   padding: 10px 20px;
   text-align: left;
   margin-bottom: 10px;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .jobreqbtn a:hover {
@@ -3242,7 +3248,7 @@ label.partTime[title="Rotating"] {
   background: none;
 }
 .jobreqbtn a.btn-job-alert {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .sidebar {
@@ -3294,12 +3300,12 @@ label.partTime[title="Rotating"] {
   top: 2px;
 }
 .sidebar a {
-  color: #0357e9;
+  color: var(--main-color);
   display: inline-block;
   margin-top: 10px;
 }
 .searchnt .btn {
-  background: #0357e9;
+  background: var(--main-color);
   display: block;
   border-radius: 0;
   width: 100%;
@@ -3348,7 +3354,7 @@ label.partTime[title="Rotating"] {
 }
 .searchList > li:hover {
   box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
-  border-bottom-color: #0357e9;
+  border-bottom-color: var(--main-color);
 }
 .searchList > li .jobltinfo {
   display: flex;
@@ -3400,16 +3406,16 @@ label.partTime[title="Rotating"] {
   background: #fff;
   display: block;
   border-radius: 7px;
-  color: #0357e9;
+  color: var(--main-color);
   text-transform: uppercase;
   font-weight: 700;
   padding: 0 15px;
   text-align: center;
-  border: 1px solid #0357e9;
+  border: 1px solid var(--main-color);
   line-height: 36px;
 }
 .searchList li .listbtn a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   text-decoration: none;
 }
@@ -3429,7 +3435,7 @@ label.partTime[title="Rotating"] {
   margin: 10px 0 0 0;
 }
 .searchList li .cateinfo {
-  color: #0357e9;
+  color: var(--main-color);
   margin: 10px 0;
 }
 .searchList li .minsalary {
@@ -3437,7 +3443,7 @@ label.partTime[title="Rotating"] {
   font-weight: 700;
   text-align: center;
   margin-top: 25px;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .searchList li .minsalary span {
   color: #999;
@@ -3469,7 +3475,7 @@ label.partTime[title="Rotating"] {
   background-color: #ddd;
 }
 .btn-primary {
-  background-color: #0357e9;
+  background-color: var(--main-color);
   line-height: normal;
   padding: 10px 25px;
 }
@@ -3504,7 +3510,7 @@ label.partTime[title="Rotating"] {
   color: #999;
 }
 .countrieslist .countryinfobox:hover {
-  border-color: #0357e9;
+  border-color: var(--main-color);
 }
 /************************************************
            == Job Detail css==
@@ -3551,7 +3557,7 @@ label.partTime[title="Rotating"] {
 }
 .companyinfo h3 {
   margin-bottom: 30px;
-  color: #0357e9;
+  color: var(--main-color);
   font-size: 24px;
 }
 .companyinfo .companylogo {
@@ -3567,7 +3573,7 @@ label.partTime[title="Rotating"] {
   border-radius: 15px;
 }
 .companyinfo .ptext {
-  color: #0357e9;
+  color: var(--main-color);
   padding: 7px 0;
 }
 .companyinfo .title a {
@@ -3576,7 +3582,7 @@ label.partTime[title="Rotating"] {
   color: #000;
 }
 .companyinfo .opening a {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .companyoverview {
   text-align: left;
@@ -3641,7 +3647,7 @@ label.partTime[title="Rotating"] {
 .loctext i {
   margin-right: 5px;
   width: 24px;
-  color: #0357e9;
+  color: var(--second-color);
 }
 .loctext a {
   color: #333;
@@ -3663,7 +3669,7 @@ label.partTime[title="Rotating"] {
 }
 .job-header .jobinfo .candidateinfo .loctext i {
   width: 20px;
-  color: #0357e9;
+  color: var(--second-color);
 }
 .container {
   max-width: 1350px;
@@ -3740,12 +3746,12 @@ label.partTime[title="Rotating"] {
   margin-bottom: 30px;
 }
 .userlinkstp a {
-  color: #0357e9;
+  color: var(--second-color);
   font-weight: 600;
   padding: 10px 25px;
   font-size: 14px;
   border-radius: 8px;
-  border: 1px solid #0357e9;
+  border: 1px solid var(--main-color);
   position: relative;
   z-index: 2;
 }
@@ -3754,7 +3760,7 @@ label.partTime[title="Rotating"] {
   border-color: #e01010;
 }
 .userlinkstp a.apply {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   font-size: 18px;
 }
@@ -3767,7 +3773,7 @@ label.partTime[title="Rotating"] {
   cursor: not-allowed;
 }
 .userlinkstp a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .userlinkstp a.report:hover {
@@ -3798,7 +3804,7 @@ label.partTime[title="Rotating"] {
 }
 .prolinkadd {
   display: inline-block;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   padding: 10px 25px;
   border-radius: 5px;
@@ -3819,7 +3825,7 @@ label.partTime[title="Rotating"] {
   margin-right: 7px;
 }
 .cadsocial a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .relatedJobs {
   margin-bottom: 30px;
@@ -3875,7 +3881,7 @@ label.partTime[title="Rotating"] {
 }
 .jobButtons a {
   margin-right: 10px;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 600;
   padding: 10px 20px;
   font-size: 16px;
@@ -3888,7 +3894,7 @@ label.partTime[title="Rotating"] {
   border-color: #e01010;
 }
 .jobButtons a.apply {
-  background: #17d27c;
+  background: var(--second-color);
   color: #fff;
   font-size: 20px;
   margin-right: 0;
@@ -3903,7 +3909,7 @@ label.partTime[title="Rotating"] {
   cursor: not-allowed;
 }
 .jobButtons a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   border-color: #fff;
 }
@@ -3963,7 +3969,7 @@ label.partTime[title="Rotating"] {
 .job-header .contentbox ul li:before {
   content: "\f00c";
   font-family: "FontAwesome";
-  color: #0357e9;
+  color: var(--main-color);
   position: absolute;
   left: 0;
 }
@@ -3998,7 +4004,7 @@ ul.skillslist li a {
 }
 ul.skillslist li a:hover {
   text-decoration: none;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 /*Job Info*/
@@ -4020,7 +4026,7 @@ ul.skillslist li a:hover {
 }
 .jobdetail h3 {
   font-size: 18px;
-  color: #0357e9;
+  color: var(--second-color);
   font-weight: 700;
 }
 .jbdetail li {
@@ -4059,14 +4065,14 @@ ul.skillslist li a:hover {
 }
 .jbdetail li span.material-symbols-outlined {
   font-weight: 400;
-  color: #0052cc;
+  color: var(--main-color);
   font-size: 30px;
 }
 .jbdetail li span.permanent {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .jbdetail li span.contract {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .jbdetail li span.freelance {
   color: #f07200;
@@ -4112,7 +4118,7 @@ ul.skillslist li a:hover {
   display: block;
 }
 .educationList li:hover {
-  border-bottom-color: #0357e9;
+  border-bottom-color: var(--main-color);
 }
 .educationList li:before {
   display: none;
@@ -4169,7 +4175,7 @@ ul.skillslist li a:hover {
   top: 5px;
 }
 .experienceList li:hover {
-  border-bottom-color: #0357e9;
+  border-bottom-color: var(--main-color);
 }
 .experienceList li:before {
   display: none;
@@ -4374,7 +4380,7 @@ ul.skillslist li a:hover {
   gap: 20px;
 }
 .contact > span {
-  background: #0357e9;
+  background: var(--main-color);
   font-size: 30px;
   line-height: 70px;
   text-align: center;
@@ -4403,6 +4409,10 @@ ul.skillslist li a:hover {
   line-height: 22px;
   margin: 0;
 }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 1px solid var(--main-color);
+}
 .contact-form input,
 .contact-form textarea {
   color: #8c8c8c;
@@ -4416,7 +4426,7 @@ ul.skillslist li a:hover {
   height: 200px;
 }
 .contact-form button {
-  background-color: #0357e9;
+  background-color: var(--main-color);
   border: 0 none;
   color: #fff;
   display: inline-block;
@@ -4440,7 +4450,7 @@ ul.skillslist li a:hover {
 .faqs h4 a {
   padding: 15px 55px 15px 15px;
   display: block;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   font-size: 16px;
   position: relative;
@@ -4457,7 +4467,7 @@ ul.skillslist li a:hover {
 .faqs h4 a:hover,
 .faqs h4 a:active {
   text-decoration: none;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .faqs h4 a:before {
@@ -4466,7 +4476,7 @@ ul.skillslist li a:hover {
   font-family: "FontAwesome";
   width: 30px;
   padding: 6px 0;
-  color: #0357e9;
+  color: var(--main-color);
   position: absolute;
   right: 15px;
   top: 8px;
@@ -4537,7 +4547,7 @@ ul.skillslist li a:hover {
 }
 .formpanel .btn {
   width: 100%;
-  background: #17d27c;
+  background: var(--second-color);
   color: #fff;
   border-radius: 5px;
   padding: 10px;
@@ -4735,7 +4745,7 @@ ul.skillslist li a:hover {
 }
 .userbtns .nav-tabs > li a:hover,
 .userbtns .nav-tabs > li a.active {
-  background: #0357e9;
+  background: var(--main-color);
   border: none;
   color: #fff;
 }
@@ -4744,7 +4754,7 @@ ul.skillslist li a:hover {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #0357e9;
+  border-top: 10px solid var(--main-color);
   content: "";
   position: absolute;
   bottom: -10px;
@@ -4756,7 +4766,7 @@ ul.skillslist li a:hover {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #0357e9;
+  border-top: 10px solid var(--main-color);
   content: "";
   position: absolute;
   bottom: -10px;
@@ -4764,7 +4774,7 @@ ul.skillslist li a:hover {
   margin-left: -5px;
 }
 .docpending {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   display: inline-block;
   padding: 10px 20px;
@@ -4791,7 +4801,7 @@ ul.skillslist li a:hover {
   color: #777;
 }
 .pkginfo strong {
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 700;
 }
 .tab-content > .active {
@@ -4833,7 +4843,7 @@ ul.skillslist li a:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 .usercoverphoto a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 .usercoverphoto img {
@@ -4873,7 +4883,7 @@ ul.skillslist li a:hover {
   font-weight: 400;
 }
 .editbtbn a:hover {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   text-decoration: none;
 }
@@ -4909,7 +4919,7 @@ ul.skillslist li a:hover {
   margin-bottom: 30px;
 }
 .expboxint:hover {
-  border-color: #0357e9;
+  border-color: var(--main-color);
 }
 .expboxint h4 {
   font-size: 20px;
@@ -4923,7 +4933,7 @@ ul.skillslist li a:hover {
   color: #999;
 }
 .expboxint p i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .userprofilealert {
   background: #eeba00;
@@ -5000,7 +5010,7 @@ ul.skillslist li a:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0029a2",endColorstr="#149ac9",GradientType=1);
 }
 .rejreason {
-  color: #0357e9;
+  color: var(--main-color);
   line-height: 17px;
   margin-top: 10px;
 }
@@ -5043,7 +5053,7 @@ ul.skillslist li a:hover {
 .featuredprofile {
   border-radius: 15px;
   padding: 30px;
-  border-top: 5px solid #0357e9;
+  border-top: 5px solid var(--main-color);
   margin-bottom: 30px;
   background: #00389b;
 }
@@ -5177,7 +5187,7 @@ ul.skillslist li a:hover {
   color: #666;
 }
 .error-msg .btn {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   margin-top: 30px;
   border-radius: 0;
@@ -5193,7 +5203,7 @@ ul.skillslist li a:hover {
 }
 .about-wraper h1 {
   font-size: 36px;
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 700;
   margin-bottom: 15px;
 }
@@ -5247,7 +5257,7 @@ ul.skillslist li a:hover {
   margin-top: 100px;
 }
 .what_we_do .main-heading {
-  color: #0357e9;
+  color: var(--main-color);
   text-align: center;
   line-height: 48px;
   font-size: 36px;
@@ -5275,7 +5285,7 @@ ul.skillslist li a:hover {
 .whatList li .icon {
   font-size: 103px;
   color: #fff;
-  background: #0357e9;
+  background: var(--main-color);
   width: 180px;
   height: 180px;
   text-align: center;
@@ -5517,7 +5527,7 @@ ul.orderlist li:before {
   padding: 0px;
   font-weight: 600;
   margin-bottom: 0;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .four-plan .boxes {
   list-style: none;
@@ -5658,7 +5668,7 @@ ul.orderlist li:before {
   padding: 15px 0;
 }
 .totalpay strong {
-  color: #0357e9;
+  color: var(--main-color);
   font-weight: 700;
 }
 .btn2s li {
@@ -5689,8 +5699,8 @@ ul.orderlist li:before {
   display: inline-block;
   color: #fff;
 }
-/* .four-plan .col-md-4:nth-child(2) .main-plan .plan-price1-2{color: #0357e9;}
-.four-plan .col-md-4:nth-child(2) .boxes{border-top-color:  #0357e9;} */
+/* .four-plan .col-md-4:nth-child(2) .main-plan .plan-price1-2{color: var(--main-color);}
+.four-plan .col-md-4:nth-child(2) .boxes{border-top-color:  var(--main-color);} */
 .main-plan .plan-price1-3 {
   font-size: 18px;
   float: left;
@@ -5986,9 +5996,9 @@ ul.orderlist li:before {
   padding: 7px 10px 0 10px;
   text-align: center;
   line-height: 20px;
-  background: #0357e9;
+  background: var(--main-color);
   letter-spacing: 0.4px;
-  outline: 3px solid #0357e9;
+  outline: 3px solid var(--main-color);
   border: 1px solid #fff;
   position: absolute;
   left: 14px;
@@ -6009,7 +6019,7 @@ ul.orderlist li:before {
   margin-top: 10px;
 }
 .post-header h4 a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .postmeta {
   margin: 10px 0 10px 0;
@@ -6017,7 +6027,7 @@ ul.orderlist li:before {
 }
 .postmeta span,
 .postmeta a {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .blogList p,
 .blogGrid li p {
@@ -6054,7 +6064,7 @@ ul.orderlist li:before {
 }
 .blogGrid li .int:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-color: #0357e9;
+  border-color: var(--main-color);
 }
 .blogGrid li .post-header {
   margin-top: 10px;
@@ -6277,11 +6287,11 @@ blockquote:after {
   font-family: "FontAwesome";
   position: absolute;
   left: 0px;
-  color: #0357e9;
+  color: var(--main-color);
   font-size: 12px;
 }
 .categories li a:hover {
-  color: #0357e9;
+  color: var(--main-color);
 }
 /*Archives*/
 .archive li {
@@ -6312,7 +6322,7 @@ blockquote:after {
   transition: all 0.4s ease-in-out;
 }
 .archive li a:hover span {
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
 }
 /*Popular Posts*/
@@ -6370,8 +6380,8 @@ blockquote:after {
   text-transform: uppercase;
 }
 .tags a:hover {
-  border: 1px solid #0357e9;
-  background: #0357e9;
+  border: 1px solid var(--main-color);
+  background: var(--main-color);
   color: #fff;
   text-decoration: none;
 }
@@ -6409,7 +6419,7 @@ blockquote:after {
   align-items: center;
 }
 .usernavdash li a:hover {
-  color: #0357e9;
+  color: var(--main-color);
   text-decoration: none;
 }
 .usernavdash li i {
@@ -6419,11 +6429,11 @@ blockquote:after {
   color: #999;
 }
 .usernavdash li.active a {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .usernavdash li.active a i,
 .usernavdash li a:hover i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .fade:not(.show) {
   opacity: 1;
@@ -6580,17 +6590,17 @@ blockquote:after {
   font-weight: 700;
 }
 .instoretxt .currency strong {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .instoretxt strong {
   font-weight: 700;
-  color: #0357e9;
+  color: var(--main-color);
 }
 .instoretxt a {
   font-size: 18px;
   display: inline-block;
   padding: 9px 20px;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   margin: 0 5px;
 }
@@ -6776,7 +6786,7 @@ blockquote:after {
   border-right: 1px solid #ddd;
 }
 .subscribe .btn {
-  background: #0357e9;
+  background: var(--main-color);
   padding: 15px 20px;
   color: #fff;
   border: none;
@@ -6969,7 +6979,7 @@ blockquote:after {
 .elemental .about-section .personal-details {
   padding: 1em;
   margin-bottom: 0;
-  background: #0357e9;
+  background: var(--main-color);
 }
 .elemental .about-section .contact {
   border: none;
@@ -7220,7 +7230,7 @@ blockquote:after {
 }
 .profbtn {
   margin-top: 10px;
-  background: #0357e9;
+  background: var(--main-color);
   color: #fff;
   font-size: 14px;
   padding: 5px 10px;
@@ -7235,7 +7245,7 @@ blockquote:after {
 }
 .location i,
 .minsalary i {
-  color: #0357e9;
+  color: var(--main-color);
 }
 .jobskrbtnact {
   border-top: 1px solid #eee;
@@ -7420,7 +7430,7 @@ blockquote:after {
   font-size: 14px;
 }
 .footerWrap .quicklinks li a:hover {
-  color: #17d27c;
+  color: var(--second-color);
   text-decoration: none;
 }
 .copyright {
@@ -8612,7 +8622,7 @@ Large Mobile Screen
 
 /* Company Payment History Page - Modern Design */
 .company-payment-history-header {
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
+  background: linear-gradient(135deg, #5e2dfa 0%, var(--second-color) 100%);
   color: white;
   padding: 25px;
   border-radius: 12px;
@@ -8688,7 +8698,7 @@ Large Mobile Screen
 }
 
 .company-payment-price-badge {
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
+  background: linear-gradient(135deg, #5e2dfa 0%, var(--second-color) 100%);
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
@@ -8715,7 +8725,7 @@ Large Mobile Screen
 .company-payment-detail-icon-inline {
   min-width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
+  background: linear-gradient(135deg, #5e2dfa 0%, var(--second-color) 100%);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -8818,7 +8828,7 @@ Large Mobile Screen
   margin-top: 20px;
   display: inline-block;
   padding: 12px 30px;
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
+  background: linear-gradient(135deg, #5e2dfa 0%, var(--second-color) 100%);
   color: white;
   text-decoration: none;
   border-radius: 25px;
@@ -8991,7 +9001,7 @@ Large Mobile Screen
 }
 
 .bloginner .postmeta a:hover {
-  color: #17d27c;
+  color: var(--second-color);
   text-decoration: underline;
 }
 
@@ -9095,7 +9105,7 @@ Large Mobile Screen
   left: 0;
   width: 60px;
   height: 3px;
-  background: #17d27c;
+  background: var(--second-color);
 }
 
 /* Search Widget */
@@ -9121,7 +9131,7 @@ Large Mobile Screen
   position: absolute;
   right: 5px;
   top: 5px;
-  background: linear-gradient(135deg, #5e2dfa 0%, #17d27c 100%);
+  background: linear-gradient(135deg, #5e2dfa 0%, var(--second-color) 100%);
   color: white;
   border: none;
   border-radius: 50%;
@@ -9166,7 +9176,7 @@ Large Mobile Screen
 
 .blogsidebar .categories li:hover::before {
   left: 5px;
-  color: #17d27c;
+  color: var(--second-color);
 }
 
 .blogsidebar .categories li a {
@@ -9275,7 +9285,7 @@ Large Mobile Screen
 
 .user-package-details .package-header i {
   margin-right: 10px;
-  color: #17d27c;
+  color: var(--second-color);
 }
 
 /* User Package Info Grid - Uses existing package-info-grid */

@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+
 /* * ******  User Start ********** */
+
+
 Route::get('list-users', array_merge(['uses' => 'Admin\UserController@indexUsers'], $all_users))->name('list.users');
+Route::get('candidate_selection', array_merge(['uses' => 'Admin\UserController@Candidate_selection'], $all_users))->name('candidate.selection');
 Route::get('list-applicants', array_merge(['uses' => 'Admin\UserController@appliedUsers'], $all_users))->name('list.applicants');
 Route::get('fetch-applicants', array_merge(['uses' => 'Admin\UserController@fetchApplicantsData'], $all_users))->name('fetch.data.applicants');
 Route::get('reject-candidate/{id}', array_merge(['uses' => 'Admin\UserController@rejectCandidate'], $all_users))->name('reject.candidate');
@@ -21,6 +26,8 @@ Route::delete('delete-user', array_merge(['uses' => 'Admin\UserController@delete
 Route::get('fetch-users', array_merge(['uses' => 'Admin\UserController@fetchUsersData'], $all_users))->name('fetch.data.users');
 Route::put('make-active-user', array_merge(['uses' => 'Admin\UserController@makeActiveUser'], $all_users))->name('make.active.user');
 Route::put('make-not-active-user', array_merge(['uses' => 'Admin\UserController@makeNotActiveUser'], $all_users))->name('make.not.active.user');
+Route::put('make-pending-user', array_merge(['uses' => 'Admin\UserController@makePendingUser'], $all_users))->name('make.pending.user');
+Route::post('assign-company', array_merge(['uses' => 'Admin\UserController@assignUsersToCompany'], $all_users))->name('users.assign.company');
 Route::put('make-verified-user', array_merge(['uses' => 'Admin\UserController@makeVerifiedUser'], $all_users))->name('make.verified.user');
 Route::put('make-not-verified-user', array_merge(['uses' => 'Admin\UserController@makeNotVerifiedUser'], $all_users))->name('make.not.verified.user');
 
@@ -71,4 +78,3 @@ Route::post('get-profile-language-edit-form/{id}', array_merge(['uses' => 'Admin
 Route::put('update-profile-language/{language_id}/{user_id}', array_merge(['uses' => 'Admin\UserController@updateProfileLanguage'], $all_users))->name('update.profile.language');
 Route::delete('delete-profile-language', array_merge(['uses' => 'Admin\UserController@deleteProfileLanguage'], $all_users))->name('delete.profile.language');
 /* * ****** End User ********** */
-?>

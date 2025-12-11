@@ -29,11 +29,7 @@
         {!! Form::text('first_name', null, array('class'=>'form-control', 'id'=>'first_name', 'placeholder'=>'First Name')) !!}
         {!! APFrmErrHelp::showErrors($errors, 'first_name') !!}                                       
     </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'middle_name') !!}">
-        {!! Form::label('middle_name', 'Middle Name', ['class' => 'bold']) !!}                    
-        {!! Form::text('middle_name', null, array('class'=>'form-control', 'id'=>'middle_name', 'placeholder'=>'Middle Name')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'middle_name') !!}                                       
-    </div>
+    
     <div class="form-group {!! APFrmErrHelp::hasError($errors, 'last_name') !!}">
         {!! Form::label('last_name', 'Last Name', ['class' => 'bold']) !!}                    
         {!! Form::text('last_name', null, array('class'=>'form-control', 'id'=>'last_name', 'placeholder'=>'Last Name')) !!}
@@ -49,31 +45,15 @@
         {!! Form::password('password', array('class'=>'form-control', 'id'=>'password', 'placeholder'=>'Password')) !!}
         {!! APFrmErrHelp::showErrors($errors, 'password') !!}                                       
     </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'father_name') !!}">
-        {!! Form::label('father_name', 'Father Name', ['class' => 'bold']) !!}                    
-        {!! Form::text('father_name', null, array('class'=>'form-control', 'id'=>'father_name', 'placeholder'=>'Father Name')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'father_name') !!}                                       
-    </div>
+    
     <div class="form-group {!! APFrmErrHelp::hasError($errors, 'date_of_birth') !!}">
         {!! Form::label('date_of_birth', 'Date of Birth', ['class' => 'bold']) !!}                    
         {!! Form::text('date_of_birth', null, array('class'=>'form-control datepicker', 'id'=>'date_of_birth', 'placeholder'=>'Date of Birth', 'autocomplete'=>'off')) !!}
         {!! APFrmErrHelp::showErrors($errors, 'date_of_birth') !!}                                       
     </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'gender_id') !!}">
-        {!! Form::label('gender_id', 'Gender', ['class' => 'bold']) !!}                    
-        {!! Form::select('gender_id', [''=>'Select Gender']+$genders, null, array('class'=>'form-control', 'id'=>'gender_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'gender_id') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'marital_status_id') !!}">
-        {!! Form::label('marital_status_id', 'Marital Status', ['class' => 'bold']) !!}                    
-        {!! Form::select('marital_status_id', [''=>'Select Marital Status']+$maritalStatuses, null, array('class'=>'form-control', 'id'=>'marital_status_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'marital_status_id') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'nationality_id') !!}">
-        {!! Form::label('nationality_id', 'Nationality', ['class' => 'bold']) !!}                    
-        {!! Form::select('nationality_id', [''=>'Select Nationality']+$nationalities, null, array('class'=>'form-control', 'id'=>'nationality_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'nationality_id') !!}                                       
-    </div>
+    
+    
+    
     <div class="form-group {!! APFrmErrHelp::hasError($errors, 'national_id_card_number') !!}">
         {!! Form::label('national_id_card_number', 'National ID Card#', ['class' => 'bold']) !!}                    
         {!! Form::text('national_id_card_number', null, array('class'=>'form-control', 'id'=>'national_id_card_number', 'placeholder'=>'National ID Card#')) !!}
@@ -98,11 +78,7 @@
         </span>
         {!! APFrmErrHelp::showErrors($errors, 'city_id') !!}                                       
     </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'phone') !!}">
-        {!! Form::label('phone', 'Phone', ['class' => 'bold']) !!}                    
-        {!! Form::text('phone', null, array('class'=>'form-control', 'id'=>'phone', 'placeholder'=>'Phone')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'phone') !!}                                       
-    </div>
+   
     <div class="form-group {!! APFrmErrHelp::hasError($errors, 'mobile_num') !!}">
         {!! Form::label('mobile_num', 'Mobile Number', ['class' => 'bold']) !!}                    
         {!! Form::text('mobile_num', null, array('class'=>'form-control', 'id'=>'mobile_num', 'placeholder'=>'Mobile Number')) !!}
@@ -113,36 +89,12 @@
         {!! Form::select('job_experience_id', [''=>'Select Experience']+$jobExperiences, null, array('class'=>'form-control', 'id'=>'job_experience_id')) !!}
         {!! APFrmErrHelp::showErrors($errors, 'job_experience_id') !!}                                       
     </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'career_level_id') !!}">
-        {!! Form::label('career_level_id', 'Career Level', ['class' => 'bold']) !!}                    
-        {!! Form::select('career_level_id', [''=>'Select Career Level']+$careerLevels, null, array('class'=>'form-control', 'id'=>'career_level_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'career_level_id') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'industry_id') !!}">
-        {!! Form::label('industry_id', 'Industry', ['class' => 'bold']) !!}                    
-        {!! Form::select('industry_id', [''=>'Select Industry']+$industries, null, array('class'=>'form-control', 'id'=>'industry_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'industry_id') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'functional_area_id') !!}">
-        {!! Form::label('functional_area_id', 'Functional Area', ['class' => 'bold']) !!}                    
-        {!! Form::select('functional_area_id', [''=>'Select Functional Area']+$functionalAreas, null, array('class'=>'form-control', 'id'=>'functional_area_id')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'functional_area_id') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'current_salary') !!}">
-        {!! Form::label('current_salary', 'Current Salary', ['class' => 'bold']) !!}                    
-        {!! Form::text('current_salary', null, array('class'=>'form-control', 'id'=>'current_salary', 'placeholder'=>'Current Salary')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'current_salary') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'expected_salary') !!}">
-        {!! Form::label('expected_salary', 'Expected Salary', ['class' => 'bold']) !!}                    
-        {!! Form::text('expected_salary', null, array('class'=>'form-control', 'id'=>'expected_salary', 'placeholder'=>'Expected Salary')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'expected_salary') !!}                                       
-    </div>
-    <div class="form-group {!! APFrmErrHelp::hasError($errors, 'salary_currency') !!}">
-        {!! Form::label('salary_currency', 'Salary Currency', ['class' => 'bold']) !!}                    
-        {!! Form::text('salary_currency', null, array('class'=>'form-control', 'id'=>'salary_currency', 'placeholder'=>'Salary Currency', 'autocomplete'=>'off')) !!}
-        {!! APFrmErrHelp::showErrors($errors, 'salary_currency') !!}                                       
-    </div>
+    
+   
+   
+  
+    
+    
     <div class="form-group {!! APFrmErrHelp::hasError($errors, 'street_address') !!}">
         {!! Form::label('street_address', 'Street Address', ['class' => 'bold']) !!}                    
         {!! Form::textarea('street_address', null, array('class'=>'form-control', 'id'=>'street_address', 'placeholder'=>'Street Address')) !!}

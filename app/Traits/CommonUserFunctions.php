@@ -36,8 +36,8 @@ trait CommonUserFunctions
             return 'notok';
         }
     }
-	
-	private function deleteUserCoverImage($id)
+
+    private function deleteUserCoverImage($id)
     {
         try {
             $user = User::findOrFail($id);
@@ -52,8 +52,34 @@ trait CommonUserFunctions
             return 'notok';
         }
     }
-	
-	
+
+    private function deleteUserDocument($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+
+
+            // Assuming the document filename is stored in: $user->document
+            $document = $user->cv_document;
+            //dd($document);
+
+            if (!empty($document)) {
+
+                // Delete the document from the main folder
+                File::delete(ImgUploader::real_public_path() . 'user_documents/' . $document);
+
+                // If you have additional sizes/paths, you can add them here:
+                // File::delete(ImgUploader::real_public_path() . 'user_documents/thumb/' . $document);
+                // File::delete(ImgUploader::real_public_path() . 'user_documents/mid/' . $document);
+            }
+
+            return 'ok';
+        } catch (ModelNotFoundException $e) {
+            return 'notok';
+        }
+    }
+
+
 
     public function deleteUser(Request $request)
     {
@@ -155,5 +181,4 @@ trait CommonUserFunctions
             }
         }
     }
-
 }

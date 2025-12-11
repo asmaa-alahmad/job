@@ -38,11 +38,7 @@
             <!-- Job Detail start -->
             <div class="row">
                 <div class="col-md-8">
-                    <div class="usercoverimg">
 
-                        {{ $user->printUserCoverImage() }}
-
-                    </div>
 
                     <div class="userMaininfo">
                         <div class="userPic">{{ $user->printUserImage() }} </div>
@@ -351,6 +347,7 @@
                                 allowfullscreen></iframe>
                         </div>
                     @endif
+                    {{ $user->video_link }}
 
 
 

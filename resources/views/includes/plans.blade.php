@@ -1,13 +1,18 @@
 
     @php
         use Illuminate\Support\Str;
+        // 
+       
+       
         // دالة لتحديد عدد كلمات معين
+       if (!function_exists('word_limit')) {
         function word_limit($text, $limit = 20) {
             $words = explode(' ', $text);
             return count($words) > $limit
                 ? implode(' ', array_slice($words, 0, $limit)) . '...'
                 : $text;
         }
+    }
     @endphp
    
 @if (isset($packages) && count($packages))

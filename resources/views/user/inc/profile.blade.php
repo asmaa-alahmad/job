@@ -8,7 +8,7 @@
 <h5>{{ __('Account Information') }}</h5>
 @if ($user->is_active == 0)
     <span class="alert alert-warning d-inline pending">{{ __('pending') }}</span>
-    @else
+@else
     <span class="alert alert-success d-inline pending">{{ __('active') }}</span>
 @endif
 
@@ -20,7 +20,7 @@
             {!! APFrmErrHelp::showErrors($errors, 'email') !!}
         </div>
     </div>
-    
+
 
     <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'password') !!}">
@@ -53,7 +53,7 @@
 
 
     </div>
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
         <div class="userimgupbox">
             <div class="imagearea">
                 <label>{{ __('Cover Photo') }}</label>
@@ -67,10 +67,48 @@
                 {!! APFrmErrHelp::showErrors($errors, 'cover_image') !!}
             </div>
         </div>
-    </div>
+    </div> --}}
 
+    <div class="col-md-6">
+    <div class="userimgupbox">
+        
+        <!-- Preview Area -->
+        <div class="imagearea">
+            <label>{{ __('CV Document') }}</label>
+
+            @if (!empty($user->cv_document))
+                <a href="{{ url('user_documents/' . $user->cv_document) }}" target="_blank"
+                    class="btn btn-primary btn-sm" style="margin-top: 10px;">
+                    <i class="fas fa-file-pdf"></i> {{ __('Open CV') }}
+                </a>
+            @else
+                <p class="text-muted" style="margin-top: 10px;">{{ __('No CV uploaded') }}</p>
+            @endif
+        </div>
+
+        <!-- Upload / Edit Button -->
+        <div class="formrow">
+            <div id="thumbnail"></div>
+
+            <label class="btn btn-default">
+                <i class="fas fa-upload"></i> 
+                {{ !empty($user->cv_document) ? __('Select CV') : __('Upload CV') }}
+
+                <input type="file" name="cv_document" id="cv_document" style="display: none;">
+            </label>
+
+            {!! APFrmErrHelp::showErrors($errors, 'cv_document') !!}
+        </div>
+
+    </div>
 </div>
 
+
+
+
+
+
+   
 
 
 
@@ -128,8 +166,8 @@
             {!! APFrmErrHelp::showErrors($errors, 'country_id') !!}
         </div>
     </div>
-    
-    
+
+
     <div class="col-md-3">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'state_id') !!}">
             <label for="">{{ __('State') }} <span>*</span></label>
@@ -148,12 +186,16 @@
 			{!! Form::select('nationality_id', [''=>__('Select Nationality')]+$nationalities, null, array('class'=>'form-control', 'id'=>'nationality_id')) !!}
             {!! APFrmErrHelp::showErrors($errors, 'nationality_id') !!} </div>
     </div> --}}
-     <div class="col-md-6">
+    <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'job_title_id') !!}">
-			<label for="">{{__('job_title_id')}} <span>*</span></label>
-			{!! Form::select('job_title_id', [''=>__('Select jobTitle')]+$jobTitles, null, array('class'=>'form-control', 'id'=>'job_title_id')) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'job_title_id') !!} </div>
-    </div> 
+            <label for="">{{ __('job_title_id') }} <span>*</span></label>
+            {!! Form::select('job_title_id', ['' => __('Select jobTitle')] + $jobTitles, null, [
+                'class' => 'form-control',
+                'id' => 'job_title_id',
+            ]) !!}
+            {!! APFrmErrHelp::showErrors($errors, 'job_title_id') !!}
+        </div>
+    </div>
     <div class="col-md-6">
 
 
@@ -183,12 +225,7 @@
 
     </div>
 
-    {{-- <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'phone') !!}">
-			<label for="">{{__('Phone')}} <span>*</span></label>
-			{!! Form::text('phone', null, array('class'=>'form-control', 'id'=>'phone', 'placeholder'=>__('Phone'))) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'phone') !!} </div>
-    </div> --}}
+
     <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'mobile_num') !!}">
             <label for="">{{ __('Mobile') }}</label>
@@ -199,8 +236,23 @@
             ]) !!}
             {!! APFrmErrHelp::showErrors($errors, 'mobile_num') !!}
         </div>
+
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
+        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'job_experience_id') !!}">
+            <label for="">{{ __('Job Experience') }} <span>*</span></label>
+            {!! Form::select('job_experience_id', ['' => __('Select Experience')] + $jobExperiences, null, [
+                'class' => 'form-control',
+                'id' => 'job_experience_id',
+            ]) !!}
+            {!! APFrmErrHelp::showErrors($errors, 'job_experience_id') !!}
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'street_address') !!}">
             <label for="">{{ __('Street Address') }} <span>*</span></label>
             {!! Form::textarea('street_address', null, [
@@ -210,8 +262,8 @@
             ]) !!}
             {!! APFrmErrHelp::showErrors($errors, 'street_address') !!}
         </div>
-    </div>
 
+    </div>
 </div>
 
 <hr>
@@ -232,103 +284,9 @@
 </div>
 <hr>
 
-<h5>{{ __('Career Information') }}</h5>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'job_experience_id') !!}">
-            <label for="">{{ __('Job Experience') }} <span>*</span></label>
-            {!! Form::select('job_experience_id', ['' => __('Select Experience')] + $jobExperiences, null, [
-                'class' => 'form-control',
-                'id' => 'job_experience_id',
-            ]) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'job_experience_id') !!}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'career_level_id') !!}">
-            <label for="">{{ __('Career Level') }} <span>*</span></label>
-            {!! Form::select('career_level_id', ['' => __('Select Career Level')] + $careerLevels, null, [
-                'class' => 'form-control',
-                'id' => 'career_level_id',
-            ]) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'career_level_id') !!}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'industry_id') !!}">
-            <label for="">{{ __('Select Industry') }} <span>*</span></label>
-            {!! Form::select('industry_id', ['' => __('Select Industry')] + $industries, null, [
-                'class' => 'form-control',
-                'id' => 'industry_id',
-            ]) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'industry_id') !!}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'functional_area_id') !!}">
-            <label for="">{{ __('Functional Area') }} <span>*</span></label>
-            {!! Form::select('functional_area_id', ['' => __('Select Functional Area')] + $functionalAreas, null, [
-                'class' => 'form-control',
-                'id' => 'functional_area_id',
-            ]) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'functional_area_id') !!}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'salary_currency') !!}">
-            <label for="">{{ __('Salary Currency') }}</label>
-            @php
-                $salary_currency = Request::get(
-                    'salary_currency',
-                    isset($user) && !empty($user->salary_currency)
-                        ? $user->salary_currency
-                        : $siteSetting->default_currency_code,
-                );
-            @endphp
-            {!! Form::text('salary_currency', $salary_currency, [
-                'class' => 'form-control',
-                'id' => 'salary_currency',
-                'placeholder' => __('Salary Currency'),
-                'autocomplete' => 'off',
-                'disabled' => 'disabled',
-            ]) !!}
 
-            {!! APFrmErrHelp::showErrors($errors, 'salary_currency') !!}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'current_salary') !!}">
-            <label for="">{{ __('Current Salary') }} <span>*</span></label>
-            <div class="input-group">
 
-                {!! Form::text('current_salary', null, [
-                    'class' => 'form-control',
-                    'id' => 'current_salary',
-                    'placeholder' => __('Current Salary'),
-                ]) !!}
-            </div>
-            {!! APFrmErrHelp::showErrors($errors, 'current_salary') !!}
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'expected_salary') !!}">
-            <label for="">{{ __('Expected Salary') }} <span>*</span></label>
-
-            <div class="input-group">
-
-                {!! Form::text('expected_salary', null, [
-                    'class' => 'form-control',
-                    'id' => 'expected_salary',
-                    'placeholder' => __('Expected Salary'),
-                ]) !!}
-            </div>
-
-            {!! APFrmErrHelp::showErrors($errors, 'expected_salary') !!}
-        </div>
-    </div>
-
-</div>
 
 
 

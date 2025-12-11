@@ -33,11 +33,9 @@
 				<div class="editbtbn"><a href="{{ route('build.resume') }}"><i class="fas fa-user-edit"></i> Complete CV </a></div>	</div>
 				@endif
             @include('includes.user_dashboard_stats')
-            <div class="usercoverphoto">{{auth()->user()->printUserCoverImage()}}                    
-                <a href="{{ route('my.profile') }}"><i class="fas fa-edit"></i></a>
-            </div>
+            
              <!-- Profile Information -->
-			<div class="profileban">
+			<div class="profileban mt-4">
 				<div class="abtuser">
 					<div class="row">
 						<div class="col-lg-2 col-md-3">

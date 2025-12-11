@@ -19,28 +19,21 @@ trait FetchJobSeekers
     private $fields = array(
         'users.id',
         'users.first_name',
-        'users.middle_name',
+
         'users.last_name',
         'users.name',
         'users.email',
-        'users.father_name',
         'users.date_of_birth',
-        'users.gender_id',
-        'users.marital_status_id',
-        'users.nationality_id',
-        'users.national_id_card_number',
+
+
         'users.country_id',
         'users.state_id',
         'users.city_id',
-        'users.phone',
+        'users.job_title_id',
+
         'users.mobile_num',
         'users.job_experience_id',
-        'users.career_level_id',
-        'users.industry_id',
-        'users.functional_area_id',
-        'users.current_salary',
-        'users.expected_salary',
-        'users.salary_currency',
+
         'users.street_address',
         'users.is_active',
         'users.verified',
@@ -64,56 +57,58 @@ trait FetchJobSeekers
         'users.search'
     );
 
-  public function fetchJobSeekers($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $order_by = 'id', $limit = 10, $featured = 0)
-{
-    $asc_desc = 'DESC';
-    $query = User::select($this->fields);
-    $query = $this->createQuery($query, $search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency);
+    public function fetchJobSeekers($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $order_by = 'id', $limit = 10, $featured = 0)
+    {
 
-    // Profile completion check for non-featured users
-    $query->where(function ($q) {
-        $q->where('users.is_featured', 1)
-          ->orWhere(function ($q) {
-              $q->whereHas('profileSummary')
-                ->whereHas('profileProjects')
-                ->whereHas('profileCvs')
-                ->whereHas('profileExperience')
-                ->whereHas('profileEducation')
-                ->whereHas('profileSkills')
-                ->whereHas('profileLanguages');
-          });
-    });
+        $asc_desc = 'DESC';
+        $query = User::select($this->fields);
+        //dd($query);
+        $query = $this->createQuery($query, $search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency);
 
-    // Ensure featured users are at the top
-    $query->orderBy('users.is_featured', 'DESC')
-          ->orderBy('users.id', 'DESC');
+        // Profile completion check for non-featured users
+        $query->where(function ($q) {
+            $q->where('users.is_featured', 1)
+                ->orWhere(function ($q) {
+                    $q->whereHas('profileSummary')
+                        ->whereHas('profileProjects')
+                        ->whereHas('profileCvs')
+                        ->whereHas('profileExperience')
+                        ->whereHas('profileEducation')
+                        ->whereHas('profileSkills')
+                        ->whereHas('profileLanguages');
+                });
+        });
 
-    // Return paginated results
-    return $query->paginate($limit);
-}
+        // Ensure featured users are at the top
+        $query->orderBy('users.is_featured', 'DESC')
+            ->orderBy('users.id', 'DESC');
 
-public function fetchIdsArray($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $field = 'users.id')
-{
-    $query = User::select($field);
-    $query = $this->createQuery($query, $search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency);
+        // Return paginated results
+        return $query->paginate($limit);
+    }
 
-    // Profile completion check for non-featured users
-    $query->where(function ($q) {
-        $q->where('users.is_featured', 1)
-          ->orWhere(function ($q) {
-              $q->whereHas('profileSummary')
-                ->whereHas('profileProjects')
-                ->whereHas('profileCvs')
-                ->whereHas('profileExperience')
-                ->whereHas('profileEducation')
-                ->whereHas('profileSkills')
-                ->whereHas('profileLanguages');
-          });
-    });
+    public function fetchIdsArray($search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '', $field = 'users.id')
+    {
+        $query = User::select($field);
+        $query = $this->createQuery($query, $search, $industry_ids, $functional_area_ids, $country_ids, $state_ids, $city_ids, $career_level_ids, $gender_ids, $job_experience_ids, $current_salary, $expected_salary, $salary_currency);
 
-    $array = $query->pluck($field)->toArray();
-    return array_unique($array);
-}
+        // Profile completion check for non-featured users
+        $query->where(function ($q) {
+            $q->where('users.is_featured', 1)
+                ->orWhere(function ($q) {
+                    $q->whereHas('profileSummary')
+                        ->whereHas('profileProjects')
+                        ->whereHas('profileCvs')
+                        ->whereHas('profileExperience')
+                        ->whereHas('profileEducation')
+                        ->whereHas('profileSkills')
+                        ->whereHas('profileLanguages');
+                });
+        });
+
+        $array = $query->pluck($field)->toArray();
+        return array_unique($array);
+    }
 
 
     public function createQuery($query, $search = '', $industry_ids = array(), $functional_area_ids = array(), $country_ids = array(), $state_ids = array(), $city_ids = array(), $career_level_ids = array(), $gender_ids = array(), $job_experience_ids = array(), $current_salary = 0, $expected_salary = 0, $salary_currency = '')
@@ -122,16 +117,19 @@ public function fetchIdsArray($search = '', $industry_ids = array(), $functional
         if ($search != '') {
             $query = $query->whereRaw("MATCH (`search`) AGAINST ('$search*' IN BOOLEAN MODE)");
         }
-        if (isset($industry_ids[0])) {
-            $query->whereIn('users.industry_id', $industry_ids);
-        }
+
         if (isset($functional_area_ids[0])) {
             $query->whereIn('users.functional_area_id', $functional_area_ids);
         }
         if (isset($country_ids[0])) {
             $query->whereIn('users.country_id', $country_ids);
         }
-        if (isset($state_ids[0])) {
+
+
+        if (!empty($state_ids)) {
+            if (!is_array($state_ids)) {
+                $state_ids = [$state_ids]; // تحويل string → array
+            }
             $query->whereIn('users.state_id', $state_ids);
         }
         if (isset($city_ids[0])) {
@@ -237,5 +235,4 @@ public function fetchIdsArray($search = '', $industry_ids = array(), $functional
         }
         return ['keywords' => $keywords, 'description' => $description];
     }
-
 }

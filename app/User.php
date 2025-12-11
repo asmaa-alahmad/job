@@ -263,6 +263,19 @@ class User extends Authenticatable implements MustVerifyEmail
         $cover_image = (!empty($cover_image)) ? $cover_image : 'no-no-image.gif';
         return \ImgUploader::print_image("user_images/$cover_image", $width, $height, '/admin_assets/no-cover.jpg', $this->name);
     }
+
+  public function printUserCvDocument()
+{
+    $document = (string) $this->cv_document;
+
+    // If CV exists → return its download/view URL
+    if (!empty($document)) {
+        return url("user_documents/$document");
+    }
+
+    // If not exist → return default document icon
+    return url("/admin_assets/no-document.png");
+}
     public function getName()
     {
         $html = '';

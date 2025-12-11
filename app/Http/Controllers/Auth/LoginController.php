@@ -129,7 +129,7 @@ use AuthenticatesUsers;
             $request->session()->regenerate();
 
             // Redirect to intended page or home
-            return redirect()->intended('/home');
+            return redirect()->intended('/my-profile');
         }
     }
 
