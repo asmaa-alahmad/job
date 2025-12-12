@@ -125,11 +125,11 @@
                             @endif
                         @endif
 
-                        @if (null !== $profileCv)
-                            <a href="{{ asset('cvs/' . $profileCv->cv_file) }}" class="btn">
-                                <i class="fa fa-download" aria-hidden="true"></i> {{ __('Download CV') }}
-                            </a>
-                        @endif
+                        @if (!empty($user->cv_document))
+    <a href="{{ asset('user_documents/' . $user->cv_document) }}" class="btn" download>
+        <i class="fa fa-download" aria-hidden="true"></i> {{ __('Download CV') }}
+    </a>
+@endif
 
                         @if (Auth::guard('company')->check())
                             {{-- Company viewing unlocked profile --}}
@@ -176,35 +176,46 @@
 
                     </div>
 
-                    <div class="userdetailbox">
+                     <!-- Profile Video start -->
+                    @if ($user->video_link !== '' && null !== $user->video_link)
+                        <div class="userdetailbox profileproject">
+                            <h3>{{ __('Video Profile') }}</h3>
+                            <iframe src="{{ $user->video_link }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                    @endif
+                    {{ $user->video_link }}
+
+                    {{-- <div class="userdetailbox">
                         <h3>{{ __('Skills') }}</h3>
                         <div id="skill_div"></div>
-                    </div>
+                    </div> --}}
 
 
-                    <div class="userdetailbox">
+                    {{-- <div class="userdetailbox">
                         <h3>{{ __('Languages') }}</h3>
                         <div id="language_div"></div>
-                    </div>
+                    </div> --}}
 
 
                     <!-- Experience start -->
-                    <div class="userdetailbox">
+                    {{-- <div class="userdetailbox">
                         <h3>{{ __('Experience') }}</h3>
                         <div class="" id="experience_div"></div>
-                    </div>
+                    </div> --}}
 
                     <!-- Education start -->
-                    <div class="userdetailbox">
+                    {{-- <div class="userdetailbox">
                         <h3>{{ __('Education') }}</h3>
                         <div class="" id="education_div"></div>
-                    </div>
+                    </div> --}}
 
                     <!-- Portfolio start -->
-                    <div class="userdetailbox profileproject">
+                    {{-- <div class="userdetailbox profileproject">
                         <h3>{{ __('Portfolio') }}</h3>
                         <div class="" id="projects_div"></div>
-                    </div>
+                    </div> --}}
 
 
 
@@ -338,16 +349,7 @@
 
 
 
-                    <!-- Profile Video start -->
-                    @if ($user->video_link !== '' && null !== $user->video_link)
-                        <div class="userdetailbox profileproject">
-                            <h3>{{ __('Video Profile') }}</h3>
-                            <iframe src="{{ $user->video_link }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                        </div>
-                    @endif
-                    {{ $user->video_link }}
+                   
 
 
 

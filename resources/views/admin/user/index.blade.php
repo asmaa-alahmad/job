@@ -252,21 +252,25 @@
         }
 
         function make_pending(id) {
-            $.post("{{ route('make.pending.user') }}", {
-                    id: id,
-                    _method: 'PUT',
-                    _token: '{{ csrf_token() }}'
-                })
-                .done(function(res) {
-                    if (res == 'ok') {
-                        $('#onclick_active_' + id)
-                            .attr("onclick", "make_not_active(" + id + ")")
-                            .html('<i class="fa fa-hourglass-half"></i> Pending');
-                    }
-                });
-        }
+    $.post("{{ route('make.pending.user') }}", {
+            id: id,
+            _method: 'PUT',
+            _token: '{{ csrf_token() }}'
+        })
+        .done(function (res) {
 
+            if (res.status === 'ok') {
 
+                // لو حابب تحديث الزر داخل الصف
+                $('#onclick_active_' + id)
+                    .attr("onclick", "make_not_active(" + id + ")")
+                    .html('<i class="fa fa-hourglass-half"></i> Pending');
+
+                // هنا reload لبيانات الجدول
+                $('#users-table').DataTable().ajax.reload(null, false);
+            }
+        });
+}
         function make_verified(id) {
             $.post("{{ route('make.verified.user') }}", {
                     id: id,

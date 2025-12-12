@@ -2,48 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use DB;
-use Input;
+use Auth;
 use File;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\UploadedFile;
-use ImgUploader;
-use Carbon\Carbon;
-use Redirect;
-use Newsletter;
-use App\User;
-use App\Subscription;
-use App\ApplicantMessage;
-use App\Company;
-use App\Package;
-use App\FavouriteCompany;
-use App\Gender;
-use App\MaritalStatus;
-use App\Country;
-use App\State;
+use Input;
 use App\City;
-use App\JobExperience;
-use App\JobApply;
-use App\CareerLevel;
-use App\Industry;
+use App\User;
+use Redirect;
 use App\Alert;
-use App\FunctionalArea;
+use App\State;
+use App\Gender;
+use Newsletter;
+use App\Company;
+use App\Country;
+use App\Package;
+use ImgUploader;
+use App\Industry;
+use App\JobApply;
+use Carbon\Carbon;
+use App\CareerLevel;
+use App\Subscription;
 use App\Http\Requests;
+use App\JobExperience;
+use App\MaritalStatus;
+use App\Traits\Skills;
+use App\FunctionalArea;
+use App\ProfileSummary;
+use App\ApplicantMessage;
+use App\FavouriteCompany;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Controllers\Controller;
+use App\Traits\ProfileCvsTrait;
+use App\Helpers\DataArrayHelper;
+use App\Traits\ProfileSkillTrait;
+use Illuminate\Http\UploadedFile;
 use App\Traits\CommonUserFunctions;
 use App\Traits\ProfileSummaryTrait;
-use App\Traits\ProfileCvsTrait;
-use App\Traits\ProfileProjectsTrait;
-use App\Traits\ProfileExperienceTrait;
-use App\Traits\ProfileEducationTrait;
-use App\Traits\ProfileSkillTrait;
+use App\Http\Controllers\Controller;
 use App\Traits\ProfileLanguageTrait;
-use App\Traits\Skills;
+use App\Traits\ProfileProjectsTrait;
+use Illuminate\Support\Facades\Hash;
+use App\Traits\ProfileEducationTrait;
+use App\Traits\ProfileExperienceTrait;
 use App\Http\Requests\Front\UserFrontFormRequest;
-use App\Helpers\DataArrayHelper;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -111,87 +112,94 @@ class UserController extends Controller
     }
 
     public function updateMyProfile(UserFrontFormRequest $request)
-    {
-        $user = User::findOrFail(Auth::user()->id);
-        /*         * **************************************** */
-        if ($request->hasFile('image')) {
-            $is_deleted = $this->deleteUserImage($user->id);
-            $image = $request->file('image');
-            $fileName = ImgUploader::UploadImage('user_images', $image, $request->input('name'), 300, 300, false);
-            $user->image = $fileName;
-        }
+{
+    $user = User::findOrFail(Auth::user()->id);
 
-        if ($request->hasFile('cover_image')) {
-            $is_deleted = $this->deleteUserCoverImage($user->id);
-            $cover_image = $request->file('cover_image');
-            $fileName_cover_image = ImgUploader::UploadImage('user_images', $cover_image, $request->input('name'), 1140, 250, false);
-            $user->cover_image = $fileName_cover_image;
-        }
-
-        if ($request->hasFile('cv_document')) {
-           // dd('yes document');
-
-            // delete old CV document
-            $is_deleted = $this->deleteUserDocument($user->id);
-
-            // uploaded file
-            $cv_document = $request->file('cv_document');
-
-            // upload CV file (PDF/DOC/DOCX etc.)
-            $fileName_cv_document = ImgUploader::UploadDoc('user_documents', $cv_document, $request->input('name'));
-
-            // save to user record
-            $user->cv_document = $fileName_cv_document;
-        }
-
-
-
-        /*         * ************************************** */
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        /*         * *********************** */
-        $user->name = $user->getName();
-        /*         * *********************** */
-        $user->email = $request->input('email');
-        if (!empty($request->input('password'))) {
-            $user->password = Hash::make($request->input('password'));
-        }
-        $user->date_of_birth = $request->input('date_of_birth');
-
-        $user->country_id = $request->input('country_id');
-        $user->state_id = $request->input('state_id');
-        $user->city_id = $request->input('city_id');
-        $user->job_title_id = $request->input('job_title_id');
-        $user->mobile_num = $request->input('mobile_num');
-        $user->job_experience_id = $request->input('job_experience_id');
-
-        $user->video_link = $request->video_link;
-        $user->street_address = $request->input('street_address');
-        $user->is_subscribed = $request->input('is_subscribed', 0);
-
-        $user->update();
-
-        $this->updateUserFullTextSearch($user);
-        /*************************/
-        Subscription::where('email', 'like', $user->email)->delete();
-        if ((bool)$user->is_subscribed) {
-            $subscription = new Subscription();
-            $subscription->email = $user->email;
-            $subscription->name = $user->name;
-            $subscription->save();
-
-            /*************************/
-			//Newsletter::subscribeOrUpdate($subscription->email, ['FNAME'=>$subscription->name]);
-            /*************************/
-        } else {
-            /*************************/
-			//Newsletter::unsubscribe($user->email);
-            /*************************/
-        }
-
-        flash(__('You have updated your profile successfully'))->success();
-        return \Redirect::route('my.profile');
+    /* ------------------------------------ */
+    /* تحديث صورة البروفايل */
+    if ($request->hasFile('image')) {
+        $this->deleteUserImage($user->id);
+        $image = $request->file('image');
+        $fileName = ImgUploader::UploadImage('user_images', $image, $request->input('name'), 300, 300, false);
+        $user->image = $fileName;
     }
+
+    /* تحديث صورة الغلاف */
+    if ($request->hasFile('cover_image')) {
+        $this->deleteUserCoverImage($user->id);
+        $cover_image = $request->file('cover_image');
+        $fileName_cover_image = ImgUploader::UploadImage('user_images', $cover_image, $request->input('name'), 1140, 250, false);
+        $user->cover_image = $fileName_cover_image;
+    }
+
+    /* تحديث ملف السيرة الذاتية */
+    if ($request->hasFile('cv_document')) {
+
+        // delete old CV document
+        $this->deleteUserDocument($user->id);
+
+        // uploaded file
+        $cv_document = $request->file('cv_document');
+
+        // upload CV file
+        $fileName_cv_document = ImgUploader::UploadDoc('user_documents', $cv_document, $request->input('name'));
+
+        // save to user record
+        $user->cv_document = $fileName_cv_document;
+    }
+
+    /* ------------------------------------ */
+    /* تحديث بيانات المستخدم */
+    $user->first_name = $request->input('first_name');
+    $user->last_name = $request->input('last_name');
+    $user->name = $user->getName();
+    $user->email = $request->input('email');
+
+    if (!empty($request->input('password'))) {
+        $user->password = Hash::make($request->input('password'));
+    }
+
+    $user->date_of_birth = $request->input('date_of_birth');
+    $user->job_title_id = $request->input('job_title_id');
+    $user->mobile_num = $request->input('mobile_num');
+    $user->video_link = $request->video_link;
+    $user->street_address = $request->input('street_address');
+    $user->is_subscribed = $request->input('is_subscribed', 0);
+
+    /* ------------------------------------ */
+    /* تحديث الـ Summary */
+    if ($request->filled('summary')) {
+
+        // حذف الملخص السابق
+        ProfileSummary::where('user_id', $user->id)->delete();
+
+        // إضافة الملخص الجديد
+        $profileSummary = new ProfileSummary();
+        $profileSummary->user_id = $user->id;
+        $profileSummary->summary = $request->input('summary');
+        $profileSummary->save();
+    }
+
+    /* حفظ بيانات المستخدم */
+    $user->update();
+
+    /* تحديث الفول تكست سيرش */
+    $this->updateUserFullTextSearch($user);
+
+    /* ------------------------------------ */
+    /* الاشتراك في القائمة البريدية */
+    Subscription::where('email', 'like', $user->email)->delete();
+
+    if ((bool)$user->is_subscribed) {
+        $subscription = new Subscription();
+        $subscription->email = $user->email;
+        $subscription->name = $user->name;
+        $subscription->save();
+    }
+
+    flash(__('You have updated your profile successfully'))->success();
+    return \Redirect::route('my.profile');
+}
 
     public function addToFavouriteCompany(Request $request, $company_slug)
     {

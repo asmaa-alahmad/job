@@ -155,7 +155,7 @@
 			{!! Form::select('marital_status_id', [''=>__('Select Marital Status')]+$maritalStatuses, null, array('class'=>'form-control', 'id'=>'marital_status_id')) !!}
             {!! APFrmErrHelp::showErrors($errors, 'marital_status_id') !!} </div>
     </div> --}}
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'country_id') !!}">
             <label for="">{{ __('Country') }} <span>*</span></label>
             <?php $country_id = old('country_id', isset($user) && (int) $user->country_id > 0 ? $user->country_id : $siteSetting->default_country_id); ?>
@@ -165,21 +165,21 @@
             ]) !!}
             {!! APFrmErrHelp::showErrors($errors, 'country_id') !!}
         </div>
-    </div>
+    </div> --}}
 
 
-    <div class="col-md-3">
+    {{-- <div class="col-md-3">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'state_id') !!}">
             <label for="">{{ __('State') }} <span>*</span></label>
             <span id="state_dd"> {!! Form::select('state_id', ['' => __('Select State')], null, ['class' => 'form-control', 'id' => 'state_id']) !!} </span> {!! APFrmErrHelp::showErrors($errors, 'state_id') !!}
         </div>
-    </div>
-    <div class="col-md-3">
+    </div> --}}
+    {{-- <div class="col-md-3">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'city_id') !!}">
             <label for="">{{ __('City') }} <span>*</span></label>
             <span id="city_dd"> {!! Form::select('city_id', ['' => __('Select City')], null, ['class' => 'form-control', 'id' => 'city_id']) !!} </span> {!! APFrmErrHelp::showErrors($errors, 'city_id') !!}
         </div>
-    </div>
+    </div> --}}
     {{-- <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'nationality_id') !!}">
 			<label for="">{{__('Nationality')}} <span>*</span></label>
@@ -238,7 +238,7 @@
         </div>
 
     </div>
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
         <div class="formrow {!! APFrmErrHelp::hasError($errors, 'job_experience_id') !!}">
             <label for="">{{ __('Job Experience') }} <span>*</span></label>
             {!! Form::select('job_experience_id', ['' => __('Select Experience')] + $jobExperiences, null, [
@@ -247,21 +247,18 @@
             ]) !!}
             {!! APFrmErrHelp::showErrors($errors, 'job_experience_id') !!}
         </div>
-    </div>
+    </div> --}}
 
 
 </div>
 <div class="row">
     <div class="col-md-6">
-        <div class="formrow {!! APFrmErrHelp::hasError($errors, 'street_address') !!}">
-            <label for="">{{ __('Street Address') }} <span>*</span></label>
-            {!! Form::textarea('street_address', null, [
-                'class' => 'form-control',
-                'id' => 'street_address',
-                'placeholder' => __('Street Address'),
-            ]) !!}
-            {!! APFrmErrHelp::showErrors($errors, 'street_address') !!}
-        </div>
+      
+       <div id="success_msg"></div>
+                <div class="formrow {!! APFrmErrHelp::hasError($errors, 'summary') !!}">
+                    <textarea name="summary" class="form-control" id="summary" placeholder="{{__('Profile Summary')}}">{{ old('summary', $user->getProfileSummary('summary')) }}</textarea>
+                    <span class="help-block summary-error"></span> </div>
+                  
 
     </div>
 </div>

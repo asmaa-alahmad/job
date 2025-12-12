@@ -1,4 +1,4 @@
-<h5>{{__('Summary')}}</h5>
+{{-- <h5>{{__('Summary')}}</h5>
 <div class="row">
     <div class="col-md-12">
         <form class="form" id="add_edit_profile_summary" method="POST" action="{{ route('update.front.profile.summary', [$user->id]) }}">
@@ -42,4 +42,4 @@
         });
     }
 </script> 
-@endpush            
+@endpush             --}}

@@ -955,17 +955,19 @@ class UserController extends Controller
         }
     }
     public function makePendingUser(Request $request)
-    {
-        $id = $request->input('id');
-        try {
-            $user = User::findOrFail($id);
-            $user->is_active = 2;
-            $user->update();
-            echo 'ok';
-        } catch (ModelNotFoundException $e) {
-            echo 'notok';
-        }
+{
+    $id = $request->input('id');
+
+    try {
+        $user = User::findOrFail($id);
+        $user->is_active = 2;
+        $user->update();
+
+        return response()->json(['status' => 'ok']);
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'notok']);
     }
+}
 
     public function makeVerifiedUser(Request $request)
     {

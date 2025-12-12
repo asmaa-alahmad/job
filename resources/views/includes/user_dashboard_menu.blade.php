@@ -159,14 +159,14 @@ function checkPaymentGateway(gateway, isConfigured, redirectUrl) {
         </li>
         <li class="{{ Request::url() == route('my.profile') ? 'active' : '' }}"><a href="{{ route('my.profile') }}"><i class="fas fa-pencil" aria-hidden="true"></i> {{__('Edit Profile')}}</a>
         </li>
-        <li class="{{ Request::url() == route('build.resume') ? 'active' : '' }}"><a href="{{ route('build.resume') }}"><i class="fas fa-file" aria-hidden="true"></i> {{ __('Build Resume') }}</a></li>
+        {{-- <li class="{{ Request::url() == route('build.resume') ? 'active' : '' }}"><a href="{{ route('build.resume') }}"><i class="fas fa-file" aria-hidden="true"></i> {{ __('Build Resume') }}</a></li> --}}
         <li><a href="{{ route('resume', Auth::user()->id) }}"><i class="fa fa-print" aria-hidden="true"></i> {{__('Download CV')}}</a></li>
         <li><a href="{{ route('view.public.profile', Auth::user()->id) }}"><i class="fas fa-eye" aria-hidden="true"></i> {{__('View Public Profile')}}</a>
         </li>
         <li class="{{ Request::url() == route('my.job.applications') ? 'active' : '' }}"><a href="{{ route('my.job.applications') }}"><i class="fas fa-desktop" aria-hidden="true"></i> {{__('My Job Applications')}}</a>
         </li>
-        <li class="{{ Request::url() == route('my.favourite.jobs') ? 'active' : '' }}"><a href="{{ route('my.favourite.jobs') }}"><i class="fas fa-heart" aria-hidden="true"></i> {{__('My Favourite Jobs')}}</a>
-        </li>
+        {{-- <li class="{{ Request::url() == route('my.favourite.jobs') ? 'active' : '' }}"><a href="{{ route('my.favourite.jobs') }}"><i class="fas fa-heart" aria-hidden="true"></i> {{__('My Favourite Jobs')}}</a>
+        </li> --}}
         <li class="{{ Request::url() == route('my-alerts') ? 'active' : '' }}"><a href="{{ route('my-alerts') }}"><i class="fas fa-bullhorn" aria-hidden="true"></i> {{__('My Job Alerts')}}</a>
         </li>
 
@@ -177,8 +177,8 @@ function checkPaymentGateway(gateway, isConfigured, redirectUrl) {
         </li>
         <li class="{{ Request::url() == route('my.messages') ? 'active' : '' }}"><a href="{{route('my.messages')}}"><i class="fas fa-envelope" aria-hidden="true"></i> {{__('My Messages')}}</a>
         </li>
-        <li class="{{ Request::url() == route('my.followings') ? 'active' : '' }}"><a href="{{route('my.followings')}}"><i class="fas fa-user" aria-hidden="true"></i> {{__('My Followings')}}</a>
-        </li>
+        {{-- <li class="{{ Request::url() == route('my.followings') ? 'active' : '' }}"><a href="{{route('my.followings')}}"><i class="fas fa-user" aria-hidden="true"></i> {{__('My Followings')}}</a>
+        </li> --}}
         <li class="{{ Request::url() == route('user.package') ? 'active' : '' }}"><a href="{{ route('user.package') }}"><i class="fas fa-box" aria-hidden="true"></i> {{__('My Packages')}}</a></li>
 
         <li class="{{ Request::url() == route('candidate.list-payment-history') ? 'active' : '' }}">
